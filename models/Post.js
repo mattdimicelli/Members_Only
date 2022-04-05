@@ -1,6 +1,6 @@
 const { Schema, model } = require('mongoose');
 
-const messageSchema = new Schema({
+const postSchema = new Schema({
     title: { 
         type: String, 
         required: true, 
@@ -16,4 +16,4 @@ const messageSchema = new Schema({
     author: { type: Schema.Types.ObjectId, required: true, ref: 'User' },
 });
 
-module.exports = model('Message', messageSchema);
+module.exports = model('Post', postSchema);

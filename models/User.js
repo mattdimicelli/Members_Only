@@ -26,10 +26,8 @@ const userSchema = new Schema({
     member: { type: Boolean, required: true },
 });
 
-userSchema.virtual('fullName')
-    .get(function() {
+userSchema.virtual('fullName').get(function() {
         return `${this.firstName} ${this.lastName}`;
-    })
-    .set(function())
+    });
 
 module.exports = model('User', userSchema);
