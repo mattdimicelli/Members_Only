@@ -31,20 +31,40 @@
         </label>
       </div>
     </nav>
+
     <input type="checkbox" id="log-in-modal" class="modal-toggle">
     <div class="modal bg-base-300">
       <label for="log-in-modal" class="btn btn-sm btn-circle absolute right-2 top-2">✕</label>
       <form class="form-control" action="/login" method="post">
-        <label class="label" for="username">Username:</label>
-        <input class="input mb-2" type="text" id="username" placeholder="Username">
+        <label class="label" for="login-username">Username/Email:</label>
+        <input class="input mb-2" type="text" id="login-username" placeholder="Username" 
+          name="login_username">
 
-        <label class="label" for="password">Password:</label>
-        <input class="input mb-2" type="password" id="password" placeholder="Password">
-
-        <label class="label" for="password-confirm">Confirm password:</label>
-        <input class="input mb-10" type="password" id="password-confirm" placeholder="Password">
+        <label class="label" for="login-password">Password:</label>
+        <input class="input mb-2" type="password" id="login-password" placeholder="Password"
+          name="login_password">
 
         <button type="submit" class="btn btn-primary">Log In</button>
+      </form>
+    </div>
+
+    <input type="checkbox" id="sign-up-modal" class="modal-toggle">
+    <div class="modal bg-base-300">
+      <label for="sign-up-modal" class="btn btn-sm btn-circle absolute right-2 top-2">✕</label>
+      <form class="form-control" action="/signup" method="post">
+        <label class="label" for="singup-username">Your email will be your username:</label>
+        <input class="input mb-2" type="text" id="signup-username" placeholder="Your email address"
+          name="signup_username">
+
+        <label class="label" for="signup-password">Password:</label>
+        <input class="input mb-2" type="password" id="signup-password" placeholder="Password"
+          name="signup_password">
+
+        <label class="label" for="signup-password-confirm">Confirm password:</label>
+        <input class="input mb-10" type="password" id="signup-password-confirm" 
+          placeholder="Confirm password" name="signup_password_confirm">
+
+        <button type="submit" class="btn btn-primary">Sign Up</button>
       </form>
     </div>
 

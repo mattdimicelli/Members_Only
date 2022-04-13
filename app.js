@@ -6,8 +6,14 @@ const express = require('express');
 const path = require('path');
 const http = require('http');
 const mongoose = require('mongoose');
+const session = require('express-session');
+const passport = require('passport');
+const bcrypt = require('bcryptjs');
+const { Strategy: LocalStrategy } = require('passport-local');
+const MongoStore = require('connect-mongo');
 const indexRouter = require('./routes/index');
 const postsRouter = require('./routes/posts');
+const { loginPost, signupPost } = require('./controllers/usersController');
 const compression = require('compression');
 const helmet = require('helmet');
 
@@ -28,6 +34,8 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', indexRouter);
 app.use('/posts', postsRouter);
+app.post('/login', loginPost);
+app.post('/signup', signupPost);
 
 
 
