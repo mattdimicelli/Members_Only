@@ -7,13 +7,46 @@
   <link rel='stylesheet' href='/stylesheets/style.css' />
   <title>Members Only - <%= title %></title>
 </head>
-<body>
-    <nav class="navbar">
-        <div class="btn-group">
-            <button>Log In</button>
-            <button>Sign Up</button>
-        </div>
+<body class="bg-base-100">
+    <nav class="navbar flex justify-between">
+      <div>
+        <a href="/" class="btn btn-ghost text-accent-content md:text-xl">Members Only 
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" 
+          stroke="currentColor" stroke-width="2">
+            <path stroke-linecap="round" stroke-linejoin="round" 
+            d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"
+            />
+          </svg>
+        </a>
+      </div>
+      <div class="flex md:gap-x-4" >
+        <!-- the label el acts as a button to open the Log In modal as well -->
+        <label for="log-in-modal" class="btn btn-primary btn-sm modal-button md:btn-lg">
+          Log In
+        </label>
+
+        <!-- the label el acts as a button to open the Sign Up modal as well -->
+        <label for="sign-up-modal" class="btn btn-secondary btn-sm modal-button md:btn-lg">
+          Sign Up
+        </label>
+      </div>
     </nav>
+    <input type="checkbox" id="log-in-modal" class="modal-toggle">
+    <div class="modal bg-base-300">
+      <label for="log-in-modal" class="btn btn-sm btn-circle absolute right-2 top-2">✕</label>
+      <form class="form-control" action="/login" method="post">
+        <label class="label" for="username">Username:</label>
+        <input class="input mb-2" type="text" id="username" placeholder="Username">
+
+        <label class="label" for="password">Password:</label>
+        <input class="input mb-2" type="password" id="password" placeholder="Password">
+
+        <label class="label" for="password-confirm">Confirm password:</label>
+        <input class="input mb-10" type="password" id="password-confirm" placeholder="Password">
+
+        <button type="submit" class="btn btn-primary">Log In</button>
+      </form>
+    </div>
 
 </body>
 </html>

@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+    <title>Error</title>
+</head>
+<body class="px-4 bg-error min-h-screen flex flex-col justify-center items-center">
+    <h1 class="text-center block text-4xl"><%= message %></h1>
+    <h2 class="text-center block text-2xl"><%= error.status %></h2>
+    <pre class="max-w-full whitespace-pre-wrap block mb-6"><%= error.stack %></pre>
+    
+    <a href="/"><button class="btn btn-success">Return to Home</button></a>
+</body>
+</html>
