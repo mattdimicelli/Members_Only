@@ -48,7 +48,14 @@
       </form>
     </div>
 
-    <input type="checkbox" id="sign-up-modal" class="modal-toggle">
+
+    
+    <% if (errors) { %>
+      <input type="checkbox" id="sign-up-modal" class="modal-toggle" checked>
+    <% } else { %>
+      <input type="checkbox" id="sign-up-modal" class="modal-toggle" >
+    <% } %>
+  
     <div class="modal bg-base-300">
       <label for="sign-up-modal" class="btn btn-sm btn-circle absolute right-2 top-2">✕</label>
       <form class="form-control" action="/signup" method="post">

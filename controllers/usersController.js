@@ -50,12 +50,12 @@ exports.signupPost = async (req, res, next) => {
                 const schemaValidationErrors = user.validateSync();
                 if (schemaValidationErrors) {
                     // there were schema validation errors in addition to password validation errors
-                    let totalValidationErrors = {...schemaValidationErrors};
+                    let totalValidationErrors = {...schemaValidationErrors.errors};
                     if (err.message === 'Passwords must match') {
-                        totalValidationErrors.errors.passwordConfirmation = err.message;
+                        totalValidationErrors.passwordConfirmation = err.message;
                     }
                     else {
-                        totalValidationErrors.errors.password = err.message;
+                        totalValidationErrors.password = err.message;
                     }
                     req.session.errorsObj = totalValidationErrors;  /* passes all validation errors 
                     on the req obj via the session middleware in order to report to the user */
@@ -78,13 +78,16 @@ exports.signupPost = async (req, res, next) => {
                 }
         }
         
-        if (err.constructor.name === 'ValidationError') {
+        else if (err.constructor.name === 'ValidationError') {
             // there were no password validation errors, only Mongoose schema validation errors
             req.session.errorsObj = err.errors;  /* passes any ValidationError (from the schema 
             validation) on the req obj via the session middleware, in order to report to user */
             res.redirect('/');
         }
 
-        next(err);
+        else {
+            next(err);
+        }
+
     }
 };
