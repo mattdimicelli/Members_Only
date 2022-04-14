@@ -52,25 +52,87 @@
     <div class="modal bg-base-300">
       <label for="sign-up-modal" class="btn btn-sm btn-circle absolute right-2 top-2">✕</label>
       <form class="form-control" action="/signup" method="post">
+
+
+        <% if (errors?.firstName) { %>
+
+          <label class="label text-error-content bg-error" for="signup-first-name">
+            <%- errors.firstName.message %>
+          </label>
+          <input class="input mb-2" type="text" id="signup-first-name" placeholder="First name"
+          name="signup_first_name">
+
+        <% } else { %>
+
         <label class="label" for="signup-first-name">First name:</label>
         <input class="input mb-2" type="text" id="signup-first-name" placeholder="First name"
           name="signup_first_name">
-        
+
+        <% } %>
+
+        <% if (errors?.lastName) { %>
+
+        <label class="label text-error-content bg-error" for="signup-last-name">
+          <%- errors.lastName.message %>
+        </label>
+        <input class="input mb-2" type="text" id="signup-last-name" placeholder="Last name"
+          name="signup_last_name">
+
+        <% } else { %>
+
         <label class="label" for="signup-last-name">Last name:</label>
         <input class="input mb-2" type="text" id="signup-last-name" placeholder="Last name"
           name="signup_last_name">
 
+        <% } %>
+
+        <% if (errors?.email) { %>
+
+        <label class="label text-error-content bg-error" for="signup-email">
+          <%- errors.email.message %>
+        </label>
+        <input class="input mb-2" type="text" id="signup-email" placeholder="Email address"
+          name="signup_email">
+        
+        <% } else { %>
+        
         <label class="label" for="signup-email">Email address:</label>
         <input class="input mb-2" type="text" id="signup-email" placeholder="Email address"
           name="signup_email">
+
+        <% } %>
+
+        <% if (errors?.password) { %>
+
+        <label class="label text-error-content bg-error" for="signup-password">
+          <%- errors.password %>
+        </label>
+        <input class="input mb-2" type="password" id="signup-password" placeholder="Password"
+          name="signup_password">
+
+        <% } else { %>
 
         <label class="label" for="signup-password">Password:</label>
         <input class="input mb-2" type="password" id="signup-password" placeholder="Password"
           name="signup_password">
 
+        <% } %>
+
+        <% if (errors?.passwordConfirmation) { %>
+
+        <label class="label text-error-content bg-error" for="signup-password-confirm">
+          <%- errors.passwordConfirmation %>
+        </label>
+        <input class="input mb-10" type="password" id="signup-password-confirm" 
+          placeholder="Confirm password" name="signup_password_confirm">
+        
+        <% } else { %>
+
         <label class="label" for="signup-password-confirm">Confirm password:</label>
         <input class="input mb-10" type="password" id="signup-password-confirm" 
           placeholder="Confirm password" name="signup_password_confirm">
+
+        <% } %>
 
         <button type="submit" class="btn btn-primary">Sign Up</button>
       </form>

@@ -2545,6 +2545,11 @@ body[dir="rtl"] .checkbox:checked,
   color: hsl(var(--ac) / var(--tw-text-opacity));
 }
 
+.text-error-content {
+  --tw-text-opacity: 1;
+  color: hsl(var(--erc, var(--nc)) / var(--tw-text-opacity));
+}
+
 @media (min-width: 768px) {
   .btn.loading.btn-xl:before, .btn.loading.md\:btn-lg:before {
     height: 1.25rem;

@@ -28,7 +28,7 @@ const userSchema = new Schema({
     email: { type: String, required: true, trim: true, validate: emailValidator },
     member: { type: Boolean, required: true, default: false },
     // password: { type: String, required: true, validate: passwordValidator, trim: true }
-    hashedPassword: { type: String },
+    hashedPassword: { type: String, required: true },
 });
 
 userSchema.virtual('fullName').get(function() {
