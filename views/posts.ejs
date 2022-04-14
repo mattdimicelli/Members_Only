@@ -36,9 +36,9 @@
     <div class="modal bg-base-300">
       <label for="log-in-modal" class="btn btn-sm btn-circle absolute right-2 top-2">✕</label>
       <form class="form-control" action="/login" method="post">
-        <label class="label" for="login-username">Username/Email:</label>
-        <input class="input mb-2" type="text" id="login-username" placeholder="Username" 
-          name="login_username">
+        <label class="label" for="login-email">Email:</label>
+        <input class="input mb-2" type="text" id="login-email" placeholder="Email address" 
+          name="login_email">
 
         <label class="label" for="login-password">Password:</label>
         <input class="input mb-2" type="password" id="login-password" placeholder="Password"
@@ -52,9 +52,17 @@
     <div class="modal bg-base-300">
       <label for="sign-up-modal" class="btn btn-sm btn-circle absolute right-2 top-2">✕</label>
       <form class="form-control" action="/signup" method="post">
-        <label class="label" for="singup-username">Your email will be your username:</label>
-        <input class="input mb-2" type="text" id="signup-username" placeholder="Your email address"
-          name="signup_username">
+        <label class="label" for="signup-first-name">First name:</label>
+        <input class="input mb-2" type="text" id="signup-first-name" placeholder="First name"
+          name="signup_first_name">
+        
+        <label class="label" for="signup-last-name">Last name:</label>
+        <input class="input mb-2" type="text" id="signup-last-name" placeholder="Last name"
+          name="signup_last_name">
+
+        <label class="label" for="signup-email">Email address:</label>
+        <input class="input mb-2" type="text" id="signup-email" placeholder="Email address"
+          name="signup_email">
 
         <label class="label" for="signup-password">Password:</label>
         <input class="input mb-2" type="password" id="signup-password" placeholder="Password"
