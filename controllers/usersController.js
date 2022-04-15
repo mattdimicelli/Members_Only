@@ -1,12 +1,12 @@
 const User = require('../models/User');
-const { generatePasswordHash } = require('../lib/passwordUtils');
 const { isStrongPassword } = require('validator');
 const passport = require('passport');
 const debug = require('debug')('app:usersController');
+const bcrypt = require('bcryptjs');
 
 // POST request for login
-exports.loginPost = passport.authenticate('local', { failureFlash: 'Invalid login credentials',
-successRedirect: '/', failureRedirect: '/' });
+exports.loginPost = passport.authenticate('local', { failureMessage: true, successRedirect: '/', 
+    failureRedirect: '/', successMessage: 'Authentication successful' });
 
 exports.signupPost = async (req, res, next) => {
     const { 
@@ -19,17 +19,18 @@ exports.signupPost = async (req, res, next) => {
 
     try {
         if (!isStrongPassword(signup_password)) {
-            throw new Error('Must be min 8 chars & contain uppercase & lowercase chars, numbers & symbols');
+            throw new Error('Must be min 8 chars & contain uppercase & lowercase chars, numbers & ' 
+                            + 'symbols');
         }
         if (signup_password !== signup_password_confirm) {
             throw new Error('Passwords must match');
         }
-        const hashedPassword = await generatePasswordHash(signup_password);
+        const hashedPassword = await bcrypt.hash(signup_password, 10);
         const user = new User({ email, firstName, lastName, hashedPassword });
         await user.save();
-        debug(`User: ${user}`);
+        debug('Mongoose user object: ', user);
         req.session.errorsObj = undefined;  /* there's no ValidationError from the schema validation
-        nor password validation so delete any previous errors from the req obj */
+        nor password validation so "delete" any previous errors from the req obj */
         res.redirect('/');
     }
 
@@ -57,18 +58,15 @@ exports.signupPost = async (req, res, next) => {
                     res.redirect('/');
                 }
                 else {
-                    // there were only password validation errors
-                    /* build an object that has the same signature as the errors object created by
-                    Mongoose */
-                    const errors = {};
+                    /* there were only password validation errors. Build an errorsObj that has the 
+                    same signature as the errors object created by Mongoose. pass password errors on
+                    the req obj via the session middleware in order to report to the user */
                     if (err.message === 'Passwords must match') {
-                        errors.passwordConfirmation = err.message;
+                        req.session.errorsObj.passwordConfirmation = err.message;
                     }
                     else {
-                        errors.password = err.message;
-                    }
-                    req.session.errorsObj = errors;  /* passes password errors on the req obj via 
-                    the session middleware in order to report to the user */
+                        req.session.errorsObj.password = err.message;
+                    } 
                     res.redirect('/');
                 }
         }

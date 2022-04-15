@@ -52,15 +52,42 @@
       </nav>
     </header>
 
-    <input type="checkbox" id="log-in-modal" class="modal-toggle">
-    <div class="modal bg-base-300">
+    <% if ((locals.sessionMessages?.[locals.sessionMessages.length - 1] === 'User not found')
+            || 
+            (locals.sessionMessages?.[locals.sessionMessages.length - 1] === 'Invalid password'))
+            { %>
+            <input type="checkbox" id="log-in-modal" class="modal-toggle" checked>
+          <% } else { %>
+            <input type="checkbox" id="log-in-modal" class="modal-toggle">
+          <% } %>
+    <div class="modal bg-base-300 flex-col">
       <label for="log-in-modal" class="btn btn-sm btn-circle absolute right-2 top-2">✕</label>
+
+      <%  if (
+              (locals.sessionMessages?.[locals.sessionMessages.length - 1] === 'User not found')
+              || 
+              (locals.sessionMessages?.[locals.sessionMessages.length - 1] === 'Invalid password')
+            ) { %>
+              <h1 class="text-error-content bg-error text-lg">Last Login Unsuccessful</h1>
+           <% } %>
+
       <form class="form-control" action="/login" method="post">
-        <label class="label" for="login-email">Email:</label>
+
+        <% if (locals.sessionMessages?.[locals.sessionMessages.length - 1] === 'User not found') {%>
+          <label class="label text-error-content bg-error" for="login-email">Email not found</label>
+        <% } else { %>
+          <label class="label" for="login-email">Email:</label>
+        <% } %>
         <input class="input mb-2" type="text" id="login-email" placeholder="Email address" 
           name="login_email">
 
-        <label class="label" for="login-password">Password:</label>
+        <% if(locals.sessionMessages?.[locals.sessionMessages.length - 1] === 'Invalid password'){%>
+          <label class="label text-error-content bg-error" for="login-password">
+            Incorrect password
+          </label>
+        <% } else { %>
+          <label class="label" for="login-password">Password:</label>
+        <% } %>
         <input class="input mb-2" type="password" id="login-password" placeholder="Password"
           name="login_password">
 

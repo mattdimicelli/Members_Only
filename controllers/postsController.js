@@ -1,5 +1,4 @@
 const Post = require('../models/Post');
-const mongoose = require('mongoose');
 
 // Display home page (posts)
 exports.homeGet = async (req, res, next) => {

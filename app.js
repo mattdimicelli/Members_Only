@@ -5,22 +5,19 @@ const cookieParser = require('cookie-parser');
 const express = require('express');
 const path = require('path');
 const http = require('http');
-const mongoose = require('mongoose');
 const session = require('express-session');
 const passport = require('passport');
-const bcrypt = require('bcryptjs');
 const MongoStore = require('connect-mongo');
+const compression = require('compression');
+const helmet = require('helmet');
+const flash = require('connect-flash');
 const indexRouter = require('./routes/index');
 const postsRouter = require('./routes/posts');
 const { loginPost, signupPost } = require('./controllers/usersController');
-const compression = require('compression');
-const helmet = require('helmet');
 const db = require('./config/database');
 const { onError, onListening, normalizePort } = require('./lib/serverUtils');
-const flash = require('connect-flash');
 
 require('dotenv').config();
-debug(process.env.MONGODB_URI);
 
 const app = express();
 app.set('views', path.join(__dirname, 'views'));
@@ -46,8 +43,13 @@ require('./config/passport');
 app.use(passport.initialize());
 app.use(passport.session());
 app.use((req, res, next) => {
-  debug(req.session);
-  debug(req.user);
+  debug('Session obj: ', req.session);
+  debug('User obj: ', req.user);
+  next();
+});
+
+app.use((req, res, next) => {
+  res.locals.sessionMessages = req.session.messages;
   next();
 });
 

@@ -1,8 +1,8 @@
 const passport = require('passport');
 const { Strategy: LocalStrategy } = require('passport-local');
-const db = require('./database');
 const User = require('../models/User');
-const { validatePassword } = require('../lib/passwordUtils');
+const bcrypt = require('bcryptjs');
+const debug = require('debug')('app:passport')
 
 const customFields = {
     usernameField: 'login_email',
@@ -13,15 +13,16 @@ const verifyCallback = async (email, password, done) => {
     try {
         const user = await User.findOne({ email });
         if (!user) { 
-            return done(null, false)
-        };
-    
-        const isValid = validatePassword(password, user.passwordHash);
-        if (isValid) { 
+            return done(null, false, { message: 'User not found' });
+        }
+
+        const passwordsMatch = await bcrypt.compare(password, user.hashedPassword);
+        if (passwordsMatch) { 
             return done(null, user);
         }
+
         else { 
-            return done(null, false);
+            return done(null, false, { message: 'Invalid password' });
         }
     }
     catch (err) {
