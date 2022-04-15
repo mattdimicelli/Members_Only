@@ -13,7 +13,7 @@ const helmet = require('helmet');
 const flash = require('connect-flash');
 const indexRouter = require('./routes/index');
 const postsRouter = require('./routes/posts');
-const { loginPost, signupPost } = require('./controllers/usersController');
+const { loginPost, signupPost, clearMessagesPost } = require('./controllers/usersController');
 const db = require('./config/database');
 const { onError, onListening, normalizePort } = require('./lib/serverUtils');
 
@@ -63,6 +63,7 @@ app.use('/', indexRouter);
 app.use('/posts', postsRouter);
 app.post('/login', loginPost);
 app.post('/signup', signupPost);
+app.post('/clear-messages', clearMessagesPost);
 
 
 app.use((req, res, next) => {

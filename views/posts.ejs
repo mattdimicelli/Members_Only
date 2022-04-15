@@ -60,15 +60,22 @@
           <% } else { %>
             <input type="checkbox" id="log-in-modal" class="modal-toggle">
           <% } %>
-    <div class="modal bg-base-300 flex-col">
-      <label for="log-in-modal" class="btn btn-sm btn-circle absolute right-2 top-2">✕</label>
 
+    <div class="modal bg-base-300 flex-col">
+      
       <%  if (
               (locals.sessionMessages?.[locals.sessionMessages.length - 1] === 'User not found')
               || 
               (locals.sessionMessages?.[locals.sessionMessages.length - 1] === 'Invalid password')
             ) { %>
+              <form action="/clear-messages" method="post">
+                  <button type="submit" for="log-in-modal" 
+                      class="btn btn-sm btn-circle absolute right-2 top-2">✕
+                  </button>
+              </form>
               <h1 class="text-error-content bg-error text-lg">Last Login Unsuccessful</h1>
+           <% } else { %>
+            <label for="log-in-modal" class="btn btn-sm btn-circle absolute right-2 top-2">✕</label>
            <% } %>
 
       <form class="form-control" action="/login" method="post">

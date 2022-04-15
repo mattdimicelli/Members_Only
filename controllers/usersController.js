@@ -4,6 +4,11 @@ const passport = require('passport');
 const debug = require('debug')('app:usersController');
 const bcrypt = require('bcryptjs');
 
+exports.clearMessagesPost = (req, res, next) => {
+    req.session.messages = undefined;
+    res.redirect('/');
+}
+
 // POST request for login
 exports.loginPost = passport.authenticate('local', { failureMessage: true, successRedirect: '/', 
     failureRedirect: '/', successMessage: 'Authentication successful' });
