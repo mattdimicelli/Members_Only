@@ -17,6 +17,7 @@ const compression = require('compression');
 const helmet = require('helmet');
 const db = require('./config/database');
 const { onError, onListening, normalizePort } = require('./lib/serverUtils');
+const flash = require('connect-flash');
 
 require('dotenv').config();
 debug(process.env.MONGODB_URI);
@@ -27,6 +28,7 @@ app.set('view engine', 'ejs');
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
+app.use(cookieParser());
 app.use(session({
   secret: process.env.SECRET,
   store: MongoStore.create({ mongoUrl: process.env.MONGODB_URI, collectionName: 'sessions' }),
@@ -37,6 +39,7 @@ app.use(session({
     maxAge: 1000 * 60 * 60 * 24,
   },
 }));
+app.use(flash());
 
 require('./config/passport');
 
@@ -52,7 +55,6 @@ app.use(helmet()); /* a wrapper around 15 smaller middlewares which secure the a
 various http headers */
 app.use(compression()); // attempts to request response bodies
 app.use(logger('dev'));
-app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', indexRouter);

@@ -8,7 +8,7 @@
   <title>Members Only - <%= title %></title>
 </head>
 <body class="bg-base-100">
-    <nav class="navbar flex justify-between">
+    <header class="navbar flex justify-between">
       <div>
         <a href="/" class="btn btn-ghost text-accent-content md:text-xl">Members Only 
           <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" 
@@ -19,7 +19,8 @@
           </svg>
         </a>
       </div>
-      <div class="flex md:gap-x-4" >
+
+      <nav class="hidden md:gap-x-4 md:flex" >
         <!-- the label el acts as a button to open the Log In modal as well -->
         <label for="log-in-modal" class="btn btn-primary btn-sm modal-button md:btn-lg">
           Log In
@@ -29,8 +30,27 @@
         <label for="sign-up-modal" class="btn btn-secondary btn-sm modal-button md:btn-lg">
           Sign Up
         </label>
-      </div>
-    </nav>
+      </nav>
+
+      <nav class="dropdown dropdown-end md:hidden">
+      <!-- <label tabindex="0"> is used instead of a <button> because Safari has a bug that prevents
+         the button from being focused. -->
+         <!-- Using tabindex="0" is required so the dropdown can be focused. -->
+        <label tabindex="0" class="btn btn-primary">
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h16" />
+          </svg>
+        </label>
+        <ul tabindex="0" class="dropdown-content menu p-2 shadow bg-base-100 rounded-box w-52">
+          <li>
+            <label for="log-in-modal" class="modal-button">Log In</label>
+          </li>
+          <li>
+            <label for="sign-up-modal" class="modal-button">Sign Up</label>
+          </li>
+        </ul>
+      </nav>
+    </header>
 
     <input type="checkbox" id="log-in-modal" class="modal-toggle">
     <div class="modal bg-base-300">

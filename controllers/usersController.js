@@ -1,19 +1,12 @@
 const User = require('../models/User');
-const mongoose = require('mongoose');
 const { generatePasswordHash } = require('../lib/passwordUtils');
 const { isStrongPassword } = require('validator');
+const passport = require('passport');
 const debug = require('debug')('app:usersController');
 
 // POST request for login
-exports.loginPost = async (req, res, next) => {
-    try {
-        const posts = await Post.find({}).exec();
-        res.render('posts', { posts, title: 'Home' });
-    }
-    catch(err) {
-        next(err);
-    }
-};
+exports.loginPost = passport.authenticate('local', { failureFlash: 'Invalid login credentials',
+successRedirect: '/', failureRedirect: '/' });
 
 exports.signupPost = async (req, res, next) => {
     const { 
@@ -23,6 +16,7 @@ exports.signupPost = async (req, res, next) => {
         signup_first_name: firstName,
         signup_last_name: lastName,
     } = req.body;
+
     try {
         if (!isStrongPassword(signup_password)) {
             throw new Error('Must be min 8 chars & contain uppercase & lowercase chars, numbers & symbols');
@@ -38,6 +32,7 @@ exports.signupPost = async (req, res, next) => {
         nor password validation so delete any previous errors from the req obj */
         res.redirect('/');
     }
+
     catch(err) {
         if (err.message === 'Passwords must match' || err.message === 'Must be min 8 chars &'
             + ' contain uppercase & lowercase chars, numbers & symbols') {
