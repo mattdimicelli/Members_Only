@@ -2752,6 +2752,14 @@ body[dir="rtl"] .checkbox:checked,
   padding: 0px;
 }
 
+.input-sm {
+  height: 2rem;
+  padding-left: 0.75rem;
+  padding-right: 0.75rem;
+  font-size: 0.875rem;
+  line-height: 2rem;
+}
+
 .absolute {
   position: absolute;
 }
@@ -2912,6 +2920,15 @@ body[dir="rtl"] .checkbox:checked,
     width: 4rem;
     border-radius: 9999px;
     padding: 0px;
+  }
+
+  .md\:input-md {
+    height: 3rem;
+    padding-left: 1rem;
+    padding-right: 1rem;
+    font-size: 0.875rem;
+    line-height: 1.25rem;
+    line-height: 2;
   }
 
   .md\:flex {

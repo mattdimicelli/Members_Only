@@ -13,7 +13,8 @@ const helmet = require('helmet');
 const flash = require('connect-flash');
 const indexRouter = require('./routes/index');
 const postsRouter = require('./routes/posts');
-const { loginPost, signupPost, clearMessagesPost } = require('./controllers/usersController');
+const { loginPost, signupPost, clearMessagesPost, clearErrorsPost } 
+  = require('./controllers/usersController');
 const db = require('./config/database');
 const { onError, onListening, normalizePort } = require('./lib/serverUtils');
 
@@ -33,7 +34,7 @@ app.use(session({
   method*/ 
   saveUninitialized: true,
   cookie: {
-    maxAge: 1000 * 60 * 60 * 24,
+    maxAge: 1000 * 60 * 30,  // 30 minutes
   },
 }));
 app.use(flash());
@@ -63,6 +64,7 @@ app.use('/', indexRouter);
 app.use('/posts', postsRouter);
 app.post('/login', loginPost);
 app.post('/signup', signupPost);
+app.post('/clear-errors', clearErrorsPost);
 app.post('/clear-messages', clearMessagesPost);
 
 

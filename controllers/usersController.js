@@ -4,6 +4,11 @@ const passport = require('passport');
 const debug = require('debug')('app:usersController');
 const bcrypt = require('bcryptjs');
 
+exports.clearErrorsPost = (req, res, next) => {
+    req.session.errorsObj = undefined;
+    res.redirect('/');
+}
+
 exports.clearMessagesPost = (req, res, next) => {
     req.session.messages = undefined;
     res.redirect('/');
