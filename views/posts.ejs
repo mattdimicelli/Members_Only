@@ -109,17 +109,17 @@
     <% } %>
   
     <div class="modal bg-base-200 flex-col">
+    <div class="modal-box">
 
     <% if (errors) { %>
       <form action="/clear-errors" method="post">
-        <button for="sign-up-modal" class="btn btn-sm btn-circle absolute right-2 top-2" 
-          type="submit">
+        <button class="btn btn-sm btn-circle absolute right-2 top-2" type="submit">
           ✕
         </button>
       </form>
       <h1 class="text-error-content bg-error text-lg">Signup Unsuccessful</h1>
     <% } else { %>
-      <label for="sign-up-modal" class="btn btn-sm btn-circle absolute right-2 top-2">✕</label>
+      <label for="sign-up-modal" class="btn btn-sm btn-circle absolute right-2 top-2 modal-button">✕</label>
     <% } %>
 
       <form class="form-control" action="/signup" method="post">
@@ -205,61 +205,58 @@
 
         <% } %>
 
-        <div>
-          <div class="avatar">
-            <button type="button" class="rounded hover:opacity-50 focus:outline">
-              <img src="/imgs/mario.png" alt="mario">
-            </button>
-          </div>
-          <div class="avatar">
-            <button type="button" class="rounded hover:opacity-50 focus:outline">
-              <img src="/imgs/luigi.png" alt="luigi">
-            </button>
-          </div>
-          <div class="avatar">
-            <button type="button" class="rounded hover:opacity-50 focus:outline">
-              <img src="/imgs/peach.png" alt="peach">
-            </button>
-          </div>
-          <div class="avatar">
-            <button type="button" class="rounded hover:opacity-50 focus:outline">
+        <fieldset class="mb-10">
+          <legend class="label">Choose an avatar:</legend>
+          <label class="avatar rounded hover:opacity-50">
+            <input type="radio" name="avatar" value="mario" class="absolute opacity-0 w-0 h-0" checked>
+            <img src="/imgs/mario.png" alt="mario">
+          </label>
+          <label class="avatar rounded hover:opacity-50">
+            <input type="radio" name="avatar" value="luigi" class="absolute opacity-0 w-0 h-0">
+            <img src="/imgs/luigi.png" alt="luigi">
+          </label>
+          <label class="avatar rounded hover:opacity-50">
+            <input type="radio" name="avatar" value="peach" class="absolute opacity-0 w-0 h-0">
+            <img src="/imgs/peach.png" alt="peach">
+          </label>
+          <label class="avatar rounded hover:opacity-50">
+            <input type="radio" name="avatar" value="donkey kong" 
+              class="absolute opacity-0 w-0 h-0">
               <img src="/imgs/dk.png" alt="donkey kong">
-            </button>
-          </div>
-          <div class="avatar">
-            <button type="button" class="rounded hover:opacity-50 focus:outline">
-              <img src="/imgs/yoshi.png" alt="yoshi">
-            </button>
-          </div>
-          <div class="avatar">
-            <button type="button" class="rounded hover:opacity-50 focus:outline">
-              <img src="/imgs/kirby.jpg" alt="kirby">
-            </button>
-          </div>
-          <div class="avatar">
-            <button type="button" class="rounded hover:opacity-50 focus:outline">
-              <img src="/imgs/bowser.png" alt="bowser">
-            </button>
-          </div>
-          <div class="avatar">
-            <button type="button" class="rounded hover:opacity-50 focus:outline">
+          </label>
+          <label class="avatar rounded hover:opacity-50">
+            <input type="radio" name="avatar" value="yoshi" class="absolute opacity-0 w-0 h-0">
+            <img src="/imgs/yoshi.png" alt="yoshi">
+          </label>
+          <label class="avatar rounded hover:opacity-50">
+            <input type="radio" name="avatar" value="kirby" class="absolute opacity-0 w-0 h-0">
+            <img src="/imgs/kirby.jpg" alt="kirby">
+          </label>
+          <label class="avatar rounded hover:opacity-50">
+            <input type="radio" name="avatar" value="bowser" class="absolute opacity-0 w-0 h-0">
+            <img src="/imgs/bowser.png" alt="bowser">
+          </label>
+          <label class="avatar rounded hover:opacity-50">
+            <input type="radio" name="avatar" value="Fox McCloud" 
+              class="absolute opacity-0 w-0 h-0">
               <img src="/imgs/fox.png" alt="Fox McCloud">
-            </button>
-          </div>
-          <div class="avatar">
-            <button type="button" class="rounded hover:opacity-50 focus:outline">
+          </label>
+          <label class="avatar rounded hover:opacity-50">
+            <input type="radio" name="avatar" value="Link from Zelda" 
+              class="absolute opacity-0 w-0 h-0">
               <img src="/imgs/link.png" alt="Link from Zelda">
-            </button>
-          </div>
-          <div class="avatar">
-            <button type="button" class="rounded hover:opacity-50 focus:outline">
-              <img src="/imgs/samus.png" alt="Samus">
-            </button>
-          </div>
-        </div>
+          </label>
+          <label class="avatar rounded hover:opacity-50">
+            <input type="radio" name="avatar" value="Samus" class="absolute opacity-0 w-0 h-0">
+            <img src="/imgs/samus.png" alt="Samus">
+          </label>
+        </fieldset>
 
-        <button type="submit" class="btn btn-secondary">Sign Up</button>
+        <div class="modal-action">
+          <button type="submit" class="btn btn-secondary">Sign Up</button>
+        </div>
       </form>
+      </div>
     </div>
 
 </body>

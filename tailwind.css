@@ -1,3 +1,8 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+input[type="radio"]:checked + img {
+    outline-style: solid;
+    outline-width: 2px;
+}

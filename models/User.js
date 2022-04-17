@@ -32,6 +32,15 @@ const userSchema = new Schema({
     },
     member: { type: Boolean, required: true, default: false },
     hashedPassword: { type: String, required: true },
+    avatar: { 
+        type: String,
+        required: [true, 'An avatar is required'],
+        enum: {
+            values: ['mario', 'luigi', 'peach', 'donkey kong', 'yoshi', 'kirby', 'bowser', 
+                    'Fox McCloud', 'Link from Zelda', 'Samus'],
+            message: '{VALUE} is not a valid avatar',
+        } 
+    },
 });
 
 userSchema.virtual('fullName').get(function() {

@@ -876,10 +876,41 @@ html {
   align-items: center;
 }
 
+.modal-box {
+  max-height: calc(100vh - 5em);
+  --tw-bg-opacity: 1;
+  background-color: hsl(var(--b1) / var(--tw-bg-opacity));
+  padding: 1.5rem;
+  transition-property: color, background-color, border-color, fill, stroke, opacity, box-shadow, transform, filter, -webkit-text-decoration-color, -webkit-backdrop-filter;
+  transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter;
+  transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter, -webkit-text-decoration-color, -webkit-backdrop-filter;
+  transition-duration: 200ms;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  width: 91.666667%;
+  max-width: 32rem;
+  --tw-scale-x: .9;
+  --tw-scale-y: .9;
+  transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
+  border-top-left-radius: var(--rounded-box, 1rem);
+  border-top-right-radius: var(--rounded-box, 1rem);
+  border-bottom-left-radius: var(--rounded-box, 1rem);
+  border-bottom-right-radius: var(--rounded-box, 1rem);
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+  overflow-y: auto;
+  -ms-scroll-chaining: none;
+      overscroll-behavior: contain;
+}
+
 .modal-open, .modal:target, .modal-toggle:checked + .modal {
   pointer-events: auto;
   visibility: visible;
   opacity: 1;
+}
+
+.modal-action {
+  display: flex;
+  margin-top: 1.5rem;
+  justify-content: flex-end;
 }
 
 .modal-toggle {
@@ -903,6 +934,22 @@ html {
 :where(.navbar > *) {
   display: inline-flex;
   align-items: center;
+}
+
+.radio {
+  flex-shrink: 0;
+  --chkbg: var(--bc);
+  height: 1.5rem;
+  width: 1.5rem;
+  cursor: pointer;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+       appearance: none;
+  border-radius: 9999px;
+  border-width: 1px;
+  border-color: hsl(var(--bc) / var(--tw-border-opacity));
+  --tw-border-opacity: 0.2;
+  transition: background, box-shadow var(--animation-input, 0.2s) ease-in-out;
 }
 
 .stack {
@@ -1477,6 +1524,12 @@ body[dir="rtl"] .checkbox:checked,
   transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
 }
 
+.modal-action > :not([hidden]) ~ :not([hidden]) {
+  --tw-space-x-reverse: 0;
+  margin-right: calc(0.5rem * var(--tw-space-x-reverse));
+  margin-left: calc(0.5rem * calc(1 - var(--tw-space-x-reverse)));
+}
+
 @-webkit-keyframes progress-loading {
   50% {
     left: 107%;
@@ -1487,6 +1540,24 @@ body[dir="rtl"] .checkbox:checked,
   50% {
     left: 107%;
   }
+}
+
+.radio:focus-visible {
+  outline: 2px solid hsl(var(--bc));
+  outline-offset: 2px;
+}
+
+.radio:checked {
+  --tw-bg-opacity: 1;
+  background-color: hsl(var(--bc) / var(--tw-bg-opacity));
+  -webkit-animation: radiomark var(--animation-input, 0.2s) ease-in-out;
+          animation: radiomark var(--animation-input, 0.2s) ease-in-out;
+  box-shadow: 0 0 0 4px hsl(var(--b1)) inset, 0 0 0 4px hsl(var(--b1)) inset;
+}
+
+.radio:disabled {
+  cursor: not-allowed;
+  opacity: 0.2;
 }
 
 @-webkit-keyframes radiomark {
@@ -1629,6 +1700,28 @@ body[dir="rtl"] .checkbox:checked,
   box-shadow: 0 0 0 2px hsl(var(--b1));
 }
 
+.modal-bottom :where(.modal-box) {
+  width: 100%;
+  max-width: none;
+  --tw-translate-y: 2.5rem;
+  --tw-scale-x: 1;
+  --tw-scale-y: 1;
+  transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
+  border-bottom-right-radius: 0px;
+  border-bottom-left-radius: 0px;
+}
+
+.modal-middle :where(.modal-box) {
+  width: 91.666667%;
+  max-width: 32rem;
+  --tw-translate-y: 0px;
+  --tw-scale-x: .9;
+  --tw-scale-y: .9;
+  transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
+  border-bottom-left-radius: var(--rounded-box, 1rem);
+  border-bottom-right-radius: var(--rounded-box, 1rem);
+}
+
 .absolute {
   position: absolute;
 }
@@ -1669,6 +1762,10 @@ body[dir="rtl"] .checkbox:checked,
   height: 1.5rem;
 }
 
+.h-0 {
+  height: 0px;
+}
+
 .min-h-screen {
   min-height: 100vh;
 }
@@ -1683,6 +1780,10 @@ body[dir="rtl"] .checkbox:checked,
 
 .w-52 {
   width: 13rem;
+}
+
+.w-0 {
+  width: 0px;
 }
 
 .max-w-full {
@@ -1761,58 +1862,23 @@ body[dir="rtl"] .checkbox:checked,
   color: hsl(var(--erc, var(--nc)) / var(--tw-text-opacity));
 }
 
+.opacity-0 {
+  opacity: 0;
+}
+
 .shadow {
   --tw-shadow: 0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1);
   --tw-shadow-colored: 0 1px 3px 0 var(--tw-shadow-color), 0 1px 2px -1px var(--tw-shadow-color);
   box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
 }
 
+input[type="radio"]:checked + img {
+  outline-style: solid;
+  outline-width: 2px;
+}
+
 .hover\:opacity-50:hover {
   opacity: 0.5;
-}
-
-.btn-outline .badge.focus\:outline:focus {
-  --tw-border-opacity: 1;
-  border-color: hsl(var(--nf, var(--n)) / var(--tw-border-opacity));
-  background-color: transparent;
-}
-
-.btn-outline:hover .badge.focus\:outline:focus {
-  --tw-border-opacity: 1;
-  border-color: hsl(var(--b2, var(--b1)) / var(--tw-border-opacity));
-  --tw-text-opacity: 1;
-  color: hsl(var(--nc) / var(--tw-text-opacity));
-}
-
-.btn-outline.btn-primary:hover .badge.focus\:outline:focus {
-  --tw-border-opacity: 1;
-  border-color: hsl(var(--pc) / var(--tw-border-opacity));
-  --tw-bg-opacity: 1;
-  background-color: hsl(var(--pf, var(--p)) / var(--tw-bg-opacity));
-  --tw-text-opacity: 1;
-  color: hsl(var(--pc) / var(--tw-text-opacity));
-}
-
-.btn-outline.btn-secondary:hover .badge.focus\:outline:focus {
-  --tw-border-opacity: 1;
-  border-color: hsl(var(--sc) / var(--tw-border-opacity));
-  --tw-bg-opacity: 1;
-  background-color: hsl(var(--sf, var(--s)) / var(--tw-bg-opacity));
-  --tw-text-opacity: 1;
-  color: hsl(var(--sc) / var(--tw-text-opacity));
-}
-
-.btn-outline.btn-accent:hover .badge.focus\:outline:focus {
-  --tw-border-opacity: 1;
-  border-color: hsl(var(--ac) / var(--tw-border-opacity));
-  --tw-bg-opacity: 1;
-  background-color: hsl(var(--af, var(--a)) / var(--tw-bg-opacity));
-  --tw-text-opacity: 1;
-  color: hsl(var(--ac) / var(--tw-text-opacity));
-}
-
-.focus\:outline:focus {
-  outline-style: solid;
 }
 
 @media (min-width: 768px) {
