@@ -7,23 +7,17 @@
   <link rel='stylesheet' href='/stylesheets/style.css' />
   <title>Super Power Club - <%= title %></title>
 </head>
-<body class="bg-base-100">
+<body class="bg-base-200 min-h-screen">
     <header class="navbar flex justify-between">
       <div>
         <a href="/" class="btn btn-ghost md:text-xl">
-          <img src="/imgs/super_power_club.png">
-          <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" 
-          stroke="currentColor" stroke-width="2">
-            <path stroke-linecap="round" stroke-linejoin="round" 
-            d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"
-            />
-          </svg>
+          <img  class="w-40" src="/imgs/nintendo_power.png" alt="nintendo power">
         </a>
       </div>
 
       <nav class="hidden md:gap-x-4 md:flex" >
         <!-- the label el acts as a button to open the Log In modal as well -->
-        <label for="log-in-modal" class="btn btn-primary btn-sm modal-button md:btn-lg">
+        <label for="log-in-modal" class="btn btn-secondary btn-sm modal-button md:btn-lg">
           Log In
         </label>
 
@@ -37,7 +31,7 @@
       <!-- <label tabindex="0"> is used instead of a <button> because Safari has a bug that prevents
          the button from being focused. -->
          <!-- Using tabindex="0" is required so the dropdown can be focused. -->
-        <label tabindex="0" class="btn btn-primary">
+        <label tabindex="0" class="btn btn-secondary">
           <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
             <path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h16" />
           </svg>
@@ -49,6 +43,9 @@
           <li>
             <label for="sign-up-modal" class="modal-button">Sign Up</label>
           </li>
+          <% if (locals.user) { %>
+          <li><a href='/join-super-power-club'>Join the Super Power Club!</a></li>
+          <% } %>
         </ul>
       </nav>
     </header>
@@ -62,7 +59,7 @@
             <input type="checkbox" id="log-in-modal" class="modal-toggle">
           <% } %>
 
-    <div class="modal bg-base-300 flex-col">
+    <div class="modal bg-base-200 flex-col">
       
       <%  if (
               (locals.sessionMessages?.[locals.sessionMessages.length - 1] === 'User not found')
@@ -99,7 +96,7 @@
         <input class="input mb-2" type="password" id="login-password" placeholder="Password"
           name="login_password">
 
-        <button type="submit" class="btn btn-primary">Log In</button>
+        <button type="submit" class="btn btn-secondary">Log In</button>
       </form>
     </div>
 
@@ -111,7 +108,7 @@
       <input type="checkbox" id="sign-up-modal" class="modal-toggle" >
     <% } %>
   
-    <div class="modal bg-base-300 flex-col">
+    <div class="modal bg-base-200 flex-col">
 
     <% if (errors) { %>
       <form action="/clear-errors" method="post">
@@ -208,10 +205,9 @@
 
         <% } %>
 
-        <button type="submit" class="btn btn-primary">Sign Up</button>
+        <button type="submit" class="btn btn-secondary">Sign Up</button>
       </form>
     </div>
 
 </body>
 </html>
-
