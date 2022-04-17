@@ -13,8 +13,8 @@ const helmet = require('helmet');
 const flash = require('connect-flash');
 const indexRouter = require('./routes/index');
 const postsRouter = require('./routes/posts');
-const { loginPost, signupPost, clearMessagesPost, clearErrorsPost, logoutGet } 
-  = require('./controllers/usersController');
+const { loginPost, signupPost, clearMessagesPost, clearErrorsPost, logoutGet, joinSuperPowerClubGet, 
+  joinSuperPowerClubPost } = require('./controllers/usersController');
 const db = require('./config/database');
 const { onError, onListening, normalizePort } = require('./lib/serverUtils');
 
@@ -63,11 +63,14 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', indexRouter);
 app.use('/posts', postsRouter);
+app.post('/clear-errors', clearErrorsPost);
+app.post('/clear-messages', clearMessagesPost);
+app.get('/join-super-power-club', joinSuperPowerClubGet);
+app.post('/join-super-power-club', joinSuperPowerClubPost);
 app.post('/login', loginPost);
 app.get('/logout', logoutGet);
 app.post('/signup', signupPost);
-app.post('/clear-errors', clearErrorsPost);
-app.post('/clear-messages', clearMessagesPost);
+
 
 
 app.use((req, res, next) => {

@@ -14,6 +14,20 @@ exports.clearMessagesPost = (req, res, next) => {
     res.redirect('/');
 }
 
+exports.joinSuperPowerClubGet = async (req, res, next) => {
+    if (req.isAuthenticated()) {
+        res.render('join_super_power_club', { title: 'Join the Super Power Club!'});
+    }
+    else {
+        res.redirect('/');
+    }
+}
+
+exports.joinSuperPowerClubPost = async (req, res, next) => {
+    const {id} = req.session.user;
+    const superPowerUser = await User.findByIdAndUpdate(id, {member: true});
+}
+
 // POST request for login
 exports.loginPost = passport.authenticate('local', { failureMessage: true, successRedirect: '/', 
     failureRedirect: '/', successMessage: 'Authentication successful' });
