@@ -18,6 +18,11 @@ exports.clearMessagesPost = (req, res, next) => {
 exports.loginPost = passport.authenticate('local', { failureMessage: true, successRedirect: '/', 
     failureRedirect: '/', successMessage: 'Authentication successful' });
 
+exports.logoutGet = (req, res, next) => {
+    req.logout();
+    res.redirect('/');
+}
+
 exports.signupPost = async (req, res, next) => {
     const { 
         signup_password,

@@ -27,19 +27,19 @@
       <form class="form-control" action="/login" method="post">
 
         <% if (locals.sessionMessages?.[locals.sessionMessages.length - 1] === 'User not found') {%>
-          <label class="label text-error-content bg-error" for="login-email">Email not found</label>
+          <label class="label text-sm md:text-base text-error-content bg-error" for="login-email">Email not found</label>
         <% } else { %>
-          <label class="label" for="login-email">Email:</label>
+          <label class="label text-sm md:text-base" for="login-email">Email:</label>
         <% } %>
         <input class="input-bordered input-sm md:input-md input mb-2" type="text" id="login-email" 
           placeholder="Email address" name="login_email">
 
         <% if(locals.sessionMessages?.[locals.sessionMessages.length - 1] === 'Invalid password'){%>
-          <label class="label text-error-content bg-error" for="login-password">
+          <label class="label text-sm md:text-base text-error-content bg-error" for="login-password">
             Incorrect password
           </label>
         <% } else { %>
-          <label class="label" for="login-password">Password:</label>
+          <label class="label text-sm md:text-base" for="login-password">Password:</label>
         <% } %>
         <input class="input-bordered input-sm md:input-md input mb-2" type="password" 
           id="login-password" placeholder="Password" name="login_password">
