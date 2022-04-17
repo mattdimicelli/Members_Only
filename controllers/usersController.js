@@ -25,6 +25,7 @@ exports.signupPost = async (req, res, next) => {
         signup_email: email,
         signup_first_name: firstName,
         signup_last_name: lastName,
+        avatar,
     } = req.body;
 
     try {
@@ -36,7 +37,7 @@ exports.signupPost = async (req, res, next) => {
             throw new Error('Passwords must match');
         }
         const hashedPassword = await bcrypt.hash(signup_password, 10);
-        const user = new User({ email, firstName, lastName, hashedPassword });
+        const user = new User({ email, firstName, lastName, hashedPassword, avatar });
         await user.save();
         debug('Mongoose user object: ', user);
         req.session.errorsObj = undefined;  /* there's no ValidationError from the schema validation
@@ -52,7 +53,7 @@ exports.signupPost = async (req, res, next) => {
                 Plug in a fake password hash so the validation doesn't fail due to a lack of a
                 real password hash */
                 const hashedPassword = 'fake password hash';
-                const user = new User({ email, firstName, lastName, hashedPassword });
+                const user = new User({ email, firstName, lastName, hashedPassword, avatar });
                 const schemaValidationErrors = user.validateSync();
                 if (schemaValidationErrors) {
                     // there were schema validation errors in addition to password validation errors

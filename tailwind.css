@@ -3,6 +3,8 @@
 @tailwind utilities;
 
 input[type="radio"]:checked + img {
+    /* this is to outline an avatar image when it's selected */
     outline-style: solid;
-    outline-width: 2px;
+    outline-width: 3px;
+    outline-color: black;
 }

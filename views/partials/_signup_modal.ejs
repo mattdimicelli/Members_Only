@@ -1,0 +1,169 @@
+<% if (errors) { %>
+    <input type="checkbox" id="sign-up-modal" class="modal-toggle" checked>
+  <% } else { %>
+    <input type="checkbox" id="sign-up-modal" class="modal-toggle" >
+  <% } %>
+
+  <div class="modal bg-base-200 flex-col">
+  <div class="modal-box">
+
+  <% if (errors) { %>
+    <form action="/clear-errors" method="post">
+      <button class="btn btn-sm btn-circle absolute right-2 top-2" type="submit">
+        ✕
+      </button>
+    </form>
+    <h1 class="text-error-content bg-error text-lg mb-2">Signup Unsuccessful</h1>
+  <% } else { %>
+    <label for="sign-up-modal" class="btn btn-sm btn-circle absolute right-2 top-2 modal-button">
+      ✕
+    </label>
+  <% } %>
+
+    <form class="form-control" action="/signup" method="post">
+
+
+      <% if (errors?.firstName) { %>
+
+        <label class="label text-sm md:text-base text-error-content bg-error" 
+          for="signup-first-name">
+          <%- errors.firstName.message %>
+        </label>
+        <input class="input input-bordered input-sm md:input-md mb-2" type="text" 
+          id="signup-first-name" placeholder="First name" name="signup_first_name">
+
+      <% } else { %>
+
+      <label class="label text-sm md:text-base" for="signup-first-name">First name:</label>
+      <input class="input input-bordered input-sm md:input-md mb-2" type="text" 
+        id="signup-first-name" placeholder="First name" name="signup_first_name">
+
+      <% } %>
+
+      <% if (errors?.lastName) { %>
+
+      <label class="label text-sm md:text-base text-error-content bg-error" for="signup-last-name">
+        <%- errors.lastName.message %>
+      </label>
+      <input class="input input-bordered input-sm md:input-md mb-2" type="text" 
+        id="signup-last-name" placeholder="Last name" name="signup_last_name">
+
+      <% } else { %>
+
+      <label class="label text-sm md:text-base" for="signup-last-name">Last name:</label>
+      <input class="input input-bordered input-sm md:input-md mb-2" type="text" 
+        id="signup-last-name" placeholder="Last name" name="signup_last_name">
+
+      <% } %>
+
+      <% if (errors?.email) { %>
+
+      <label class="label text-sm md:text-base text-error-content bg-error" for="signup-email">
+        <%- errors.email.message %>
+      </label>
+      <input class="input input-bordered input-sm md:input-md mb-2" type="text" id="signup-email" 
+        placeholder="Email address" name="signup_email">
+      
+      <% } else { %>
+      
+      <label class="label text-sm md:text-base" for="signup-email">Email address:</label>
+      <input class="input input-bordered input-sm md:input-md mb-2" type="text" id="signup-email" 
+        placeholder="Email address" name="signup_email">
+
+      <% } %>
+
+      <% if (errors?.password) { %>
+
+      <label class="label text-sm md:text-base text-error-content bg-error" for="signup-password">
+        <%- errors.password %>
+      </label>
+      <input class="input input-bordered input-sm md:input-md mb-2" type="password" 
+        id="signup-password" placeholder="Password" name="signup_password">
+
+      <% } else { %>
+
+      <label class="label text-sm md:text-base" for="signup-password">Password:</label>
+      <input class="input input-bordered input-sm md:input-md mb-2" type="password" 
+        id="signup-password" placeholder="Password" name="signup_password">
+
+      <% } %>
+
+      <% if (errors?.passwordConfirmation) { %>
+
+      <label class="label text-sm md:text-base text-error-content bg-error" 
+        for="signup-password-confirm">
+        <%- errors.passwordConfirmation %>
+      </label>
+      <input class="input input-bordered input-sm md:input-md mb-10" type="password" 
+      id="signup-password-confirm" placeholder="Confirm password" name="signup_password_confirm">
+      
+      <% } else { %>
+
+      <label class="label text-sm md:text-base" for="signup-password-confirm">
+        Confirm password:
+      </label>
+      <input class="input input-bordered input-sm md:input-md mb-10" type="password" 
+      id="signup-password-confirm" placeholder="Confirm password" name="signup_password_confirm">
+
+      <% } %>
+
+      <fieldset class="mb-10">
+        <% if (errors?.avatar) { %>
+        <legend class="label text-sm md:text-base text-error-content bg-error">
+          <%= errors.avatar %>
+        </legend>
+        <% } else { %>
+        <legend class="label text-sm md:text-base">Choose an avatar:</legend>
+        <% } %>
+        <label class="avatar rounded hover:opacity-50">
+          <input type="radio" name="avatar" value="mario" class="absolute opacity-0 w-0 h-0" 
+            checked>
+          <img src="/imgs/mario.png" alt="mario">
+        </label>
+        <label class="avatar rounded hover:opacity-50">
+          <input type="radio" name="avatar" value="luigi" class="absolute opacity-0 w-0 h-0">
+          <img src="/imgs/luigi.png" alt="luigi">
+        </label>
+        <label class="avatar rounded hover:opacity-50">
+          <input type="radio" name="avatar" value="peach" class="absolute opacity-0 w-0 h-0">
+          <img src="/imgs/peach.png" alt="peach">
+        </label>
+        <label class="avatar rounded hover:opacity-50">
+          <input type="radio" name="avatar" value="donkey kong" 
+            class="absolute opacity-0 w-0 h-0">
+            <img src="/imgs/dk.png" alt="donkey kong">
+        </label>
+        <label class="avatar rounded hover:opacity-50">
+          <input type="radio" name="avatar" value="yoshi" class="absolute opacity-0 w-0 h-0">
+          <img src="/imgs/yoshi.png" alt="yoshi">
+        </label>
+        <label class="avatar rounded hover:opacity-50">
+          <input type="radio" name="avatar" value="kirby" class="absolute opacity-0 w-0 h-0">
+          <img src="/imgs/kirby.jpg" alt="kirby">
+        </label>
+        <label class="avatar rounded hover:opacity-50">
+          <input type="radio" name="avatar" value="bowser" class="absolute opacity-0 w-0 h-0">
+          <img src="/imgs/bowser.png" alt="bowser">
+        </label>
+        <label class="avatar rounded hover:opacity-50">
+          <input type="radio" name="avatar" value="Fox McCloud" 
+            class="absolute opacity-0 w-0 h-0">
+            <img src="/imgs/fox.png" alt="Fox McCloud">
+        </label>
+        <label class="avatar rounded hover:opacity-50">
+          <input type="radio" name="avatar" value="Link from Zelda" 
+            class="absolute opacity-0 w-0 h-0">
+            <img src="/imgs/link.png" alt="Link from Zelda">
+        </label>
+        <label class="avatar rounded hover:opacity-50">
+          <input type="radio" name="avatar" value="Samus" class="absolute opacity-0 w-0 h-0">
+          <img src="/imgs/samus.png" alt="Samus">
+        </label>
+      </fieldset>
+
+      <div class="modal-action">
+        <button type="submit" class="btn btn-secondary">Sign Up</button>
+      </div>
+    </form>
+    </div>
+  </div>

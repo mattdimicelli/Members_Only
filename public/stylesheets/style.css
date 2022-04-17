@@ -1310,6 +1310,10 @@ body[dir="rtl"] .checkbox:checked,
   color: hsl(var(--bc) / var(--tw-text-opacity));
 }
 
+.input-bordered {
+  --tw-border-opacity: 0.2;
+}
+
 .input:focus {
   outline: 2px solid hsla(var(--bc) / 0.2);
   outline-offset: 2px;
@@ -1857,6 +1861,11 @@ body[dir="rtl"] .checkbox:checked,
   line-height: 1.75rem;
 }
 
+.text-sm {
+  font-size: 0.875rem;
+  line-height: 1.25rem;
+}
+
 .text-error-content {
   --tw-text-opacity: 1;
   color: hsl(var(--erc, var(--nc)) / var(--tw-text-opacity));
@@ -1873,8 +1882,10 @@ body[dir="rtl"] .checkbox:checked,
 }
 
 input[type="radio"]:checked + img {
+  /* this is to outline an avatar image when it's selected */
   outline-style: solid;
-  outline-width: 2px;
+  outline-width: 3px;
+  outline-color: black;
 }
 
 .hover\:opacity-50:hover {
@@ -1933,5 +1944,10 @@ input[type="radio"]:checked + img {
   .md\:text-xl {
     font-size: 1.25rem;
     line-height: 1.75rem;
+  }
+
+  .md\:text-base {
+    font-size: 1rem;
+    line-height: 1.5rem;
   }
 }
