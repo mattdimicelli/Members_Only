@@ -1777,6 +1777,10 @@ body[dir="rtl"] .checkbox:checked,
   display: block;
 }
 
+.inline-block {
+  display: inline-block;
+}
+
 .flex {
   display: flex;
 }
@@ -1795,6 +1799,10 @@ body[dir="rtl"] .checkbox:checked,
 
 .min-h-screen {
   min-height: 100vh;
+}
+
+.w-24 {
+  width: 6rem;
 }
 
 .w-0 {
@@ -1893,6 +1901,10 @@ body[dir="rtl"] .checkbox:checked,
   line-height: 1.25rem;
 }
 
+.font-bold {
+  font-weight: 700;
+}
+
 .uppercase {
   text-transform: uppercase;
 }
@@ -1931,8 +1943,8 @@ body[dir="rtl"] .checkbox:checked,
   box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
 }
 
-.\[text-shadow\:-0\.5px_0\.5px_\#f4290f\] {
-  text-shadow: -0.5px 0.5px #f4290f;
+.\[text-shadow\:-1px_0\.5px_\#f4290f\] {
+  text-shadow: -1px 0.5px #f4290f;
 }
 
 input[type="radio"]:checked + img {
