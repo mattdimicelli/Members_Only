@@ -1,4 +1,17 @@
 <%- include('partials/_top') %>
+    <script type="module" noonce>
+        console.log('script loaded');
+        let yearInput = document.querySelector('#year');
+        document.querySelector('#year_form').addEventListener('submit', () => {
+            if (yearInput.value === '2012') {
+                alert('Congratulations!! Your answer was correct!  Welcome to the Super Power Club!');
+                return true;
+            }
+            else return false;
+        });
+    </script>
+    <!-- use type="module" bc they defer by default -->
+<%- include('partials/_second_top') %>
 
 <main class="hero">
     <div class="hero-content">
@@ -15,15 +28,20 @@
                     Super Power Club
              </span> by correctly answering the following Nintendo triva question!
             </p>
-            <form class="form-control">
+            <form id="year_form" class="form-control" action="/join-super-power-club" method="post">
                 <label class="mb-2" for="year"><span>In what year was </span>
                     <img src='/imgs/nintendo_power.png' class="w-24 inline-block" 
                         alt='Nintendo Power'>
                 <span> magazine discontinued?</span>
                 </label>
-                <input class="mb-2 input input-bordered" type="number" name="year" id="year">  
-                <button class="btn btn-secondary" type="submit">Join the Super Power Club!</button>
+                <input class="mb-2 input input-bordered" type="number" name="year" id="year" 
+                    required>  
+                <button class="btn btn-secondary" type="submit">
+                    Join the Super Power Club!
+                </button>
             </form>
         </div>
     </div>
 </main>
+
+<% include('partials/_bottom') %>

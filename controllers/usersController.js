@@ -16,16 +16,29 @@ exports.clearMessagesPost = (req, res, next) => {
 
 exports.joinSuperPowerClubGet = async (req, res, next) => {
     if (req.isAuthenticated()) {
-        res.render('join_super_power_club', { title: 'Join the Super Power Club!'});
-    }
+            res.render('join_super_power_club', { title: 'Join the Super Power Club!'});
+        }
     else {
         res.redirect('/');
     }
 }
 
 exports.joinSuperPowerClubPost = async (req, res, next) => {
-    const {id} = req.session.user;
-    const superPowerUser = await User.findByIdAndUpdate(id, {member: true});
+    const {year} = req.body;
+    if (year === '2012') {
+        req.user.member = true;
+        try {
+            await req.user.member.save();
+            res.redirect('/');
+        }
+        catch(err) {
+            next(err);
+        }
+    }
+    else {
+        res.redirect('/join-super-power-club', { title: 'Join the Super Power Club!', 
+            errors: 'Incorrect year.  Try again!'})
+    }
 }
 
 // POST request for login
