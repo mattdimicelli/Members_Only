@@ -55,7 +55,13 @@ app.use((req, res, next) => {
   next();
 });
 
-app.use(helmet()); /* a wrapper around 15 smaller middlewares which secure the app by setting 
+app.use(
+  helmet.contentSecurityPolicy({
+    directives: {
+      "script-src": ["'self'", "'nonce-8888078926mrd'"],
+    },
+  })
+); /* a wrapper around 15 smaller middlewares which secure the app by setting 
 various http headers */
 app.use(compression()); // attempts to request response bodies
 app.use(logger('dev'));

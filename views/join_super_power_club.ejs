@@ -1,13 +1,16 @@
 <%- include('partials/_top') %>
-    <script type="module" noonce>
-        console.log('script loaded');
+    <script type="module" nonce="8888078926mrd">
         let yearInput = document.querySelector('#year');
-        document.querySelector('#year_form').addEventListener('submit', () => {
+        document.querySelector('#year_form').addEventListener('submit', (e) => {
             if (yearInput.value === '2012') {
-                alert('Congratulations!! Your answer was correct!  Welcome to the Super Power Club!');
+                alert('Congratulations!! Your answer was correct! Welcome to the Super Power Club!');
                 return true;
             }
-            else return false;
+            else {
+                alert("That's not right! Try again!");
+                e.returnValue = false;
+                return false;
+            } 
         });
     </script>
     <!-- use type="module" bc they defer by default -->

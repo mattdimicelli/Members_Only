@@ -28,7 +28,7 @@ exports.joinSuperPowerClubPost = async (req, res, next) => {
     if (year === '2012') {
         req.user.member = true;
         try {
-            await req.user.member.save();
+            await req.user.save();
             res.redirect('/');
         }
         catch(err) {
@@ -36,8 +36,7 @@ exports.joinSuperPowerClubPost = async (req, res, next) => {
         }
     }
     else {
-        res.redirect('/join-super-power-club', { title: 'Join the Super Power Club!', 
-            errors: 'Incorrect year.  Try again!'})
+        res.redirect('/join-super-power-club');
     }
 }
 
