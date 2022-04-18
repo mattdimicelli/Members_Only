@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "start": "DEBUG=app,app:* nodemon app.js",
-    "buildcss": "npx tailwindcss -i ./tailwind.css -o ./public/stylesheets/style.css",
+    "buildcss": "npx tailwindcss -i ./tailwind.css -o ./public/stylesheets/style.css --watch",
     "debug": "DEBUG=*, nodemon app.js"
   },
   "keywords": [],

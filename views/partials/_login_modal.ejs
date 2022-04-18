@@ -1,6 +1,9 @@
 <% if ((locals.sessionMessages?.[locals.sessionMessages.length - 1] === 'User not found')
             || 
-            (locals.sessionMessages?.[locals.sessionMessages.length - 1] === 'Invalid password'))
+            (locals.sessionMessages?.[locals.sessionMessages.length - 1] === 'Invalid password')
+            ||
+            (message.length > 0))  
+            // This would be a "not logged in" message
             { %>
             <input type="checkbox" id="log-in-modal" class="modal-toggle" checked>
           <% } else { %>
@@ -12,7 +15,7 @@
       <%  if (
               (locals.sessionMessages?.[locals.sessionMessages.length - 1] === 'User not found')
               || 
-              (locals.sessionMessages?.[locals.sessionMessages.length - 1] === 'Invalid password')
+              (locals.sessionMessages?.[locals.sessionMessages.length - 1] === 'Invalid password') 
             ) { %>
               <form action="/clear-messages" method="post">
                   <button type="submit" for="log-in-modal" 
@@ -20,7 +23,14 @@
                   </button>
               </form>
               <h1 class="text-error-content bg-error text-lg mb-2">Last Login Unsuccessful</h1>
-           <% } else { %>
+           <% } else if (message.length > 0) { %>
+              // This would be a "not logged in" message
+              <form action="/clear-messages" method="post">
+                  <button type="submit" for="log-in-modal" 
+                      class="btn btn-sm btn-circle absolute right-2 top-2">✕
+                  </button>
+              </form>
+            <% } else { %>
             <label for="log-in-modal" class="btn btn-sm btn-circle absolute right-2 top-2">✕</label>
            <% } %>
 

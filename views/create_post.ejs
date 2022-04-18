@@ -1,0 +1,13 @@
+<%- include('partials/_top') %>
+<%- include('partials/_second_top') %>
+
+<form class="form-control" method="post" action="/posts/create-post" id="create_post">
+  <h1>Post a Message</h1>
+  <label class="label text-sm md:text-base" for="title">Title:</label>
+  <input id="title" name="title" type="text" class="input input-bordered input-xs">
+  <label class="label text-sm md:text-base" for="message">Message:</label>
+  <textarea id="message" name="message" class="input input-bordered"></textarea>
+  <button class="btn btn-secondary" type="submit">Submit Post</button>
+</form>
+
+<%- include('partials/_bottom') %>

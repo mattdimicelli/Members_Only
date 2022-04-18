@@ -22,7 +22,10 @@
           </label>
           <ul tabindex="0" class="dropdown-content menu p-2 shadow bg-base-100 rounded-box w-52">
             <% if (locals.user) { %>
-            <li><a href='/join-super-power-club'>Join the Super Power Club!</a></li>
+            <li><a href="/posts/create-post">Create a New Post</a></li>
+              <% if (!locals.user.member) { %>
+                <li><a href='/join-super-power-club'>Join the Super Power Club!</a></li>
+              <% } %>
             <li><a href='/logout'>Log Out</a></li>
             <% } else { %>
             <li>
