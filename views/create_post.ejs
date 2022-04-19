@@ -1,13 +1,40 @@
 <%- include('partials/_top') %>
+
+<script type="module" nonce="pikachuchuchu12345">
+  console.log('boom')
+document.querySelector('form#create_post').addEventListener('submit', (e) => {
+  const messageTextArea = document.querySelector('#message');
+  const atLeastOneNonWhitespaceChar = /.*\S+.*/.test(messageTextArea.value);
+  console.log(atLeastOneNonWhitespaceChar);
+  if (atLeastOneNonWhitespaceChar) { 
+    return true; 
+  }
+  else { 
+    messageTextArea.setCustomValidity('Message required');
+    messageTextArea.reportValidity();
+    e.returnValue = false;
+    messageTextArea.setCustomValidity('');  // The validation message has already been reported to
+    // the user.  This line eliminates the validation message, allowing the form's submit event to
+    // be fired the next time the submit button is clicked
+    return false; 
+  }
+});
+</script>
+
 <%- include('partials/_second_top') %>
 
-<form class="form-control" method="post" action="/posts/create-post" id="create_post">
-  <h1>Post a Message</h1>
-  <label class="label text-sm md:text-base" for="title">Title:</label>
-  <input id="title" name="title" type="text" class="input input-bordered input-xs">
-  <label class="label text-sm md:text-base" for="message">Message:</label>
-  <textarea id="message" name="message" class="input input-bordered"></textarea>
-  <button class="btn btn-secondary" type="submit">Submit Post</button>
-</form>
+<div class="flex justify-center pt-4 px-4">
+  <form class="form-control max-w-md flex-1" method="post" action="/posts/create-post" 
+    id="create_post">
+    <h1 class="mb-2 bg-primary text-primary-content text-center">Post a Message</h1>
+    <label class="label text-sm md:text-base" for="title">Title:</label>
+    <input id="title" name="title" type="text" required maxlength="80" pattern=".*\S+.*" 
+      title="This field is required" class="input input-bordered input-xs mb-2">
+    <label class="label text-sm md:text-base" for="message">Message:</label>
+    <textarea id="message" name="message" class="textarea textarea-bordered mb-2" rows="8" 
+      maxlength="10000" required></textarea>
+    <button class="btn btn-secondary btn-sm" type="submit">Submit Post</button>
+  </form>
+<div>
 
 <%- include('partials/_bottom') %>
