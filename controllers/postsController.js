@@ -27,7 +27,22 @@ exports.createPostPost = async (req, res, next) => {
             next(err);
         }
     }
-    
+}
+
+exports.deletePostPost = async (req, res, next) => {
+    try {
+        const postId = req.params.id;
+        if (req.user && req.user.admin) {
+            await Post.findByIdAndDelete(postId);
+            res.redirect('/');
+        }
+        else {
+            res.redirect('/');
+        }
+    }
+    catch (err) {
+        next(err);
+    }
 }
 
 // Display home page (posts)
@@ -36,9 +51,9 @@ exports.homeGet = async (req, res, next) => {
     // if errorsObj, there were errors from signup/login form validation
 
     try {
-        const posts = await Post.find({}).exec();
+        const posts = await Post.find({}).populate('author').exec();
         res.render('posts', { posts, title: 'Home', errors: errorsObj, 
-            message: req.flash('login_status') });
+            message: req.flash('login_status'), user: req.user });
     }
     catch(err) {
         next(err);

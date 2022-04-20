@@ -25,7 +25,7 @@
 
 <% } %>
 
-<form class="form-control" action="/signup" method="post">
+<form id="signup_form" class="form-control" action="/signup" method="post">
 
   <% if (errors?.firstName) { %>
 
@@ -135,7 +135,7 @@
       <img src="/imgs/peach.png" alt="peach">
     </label>
     <label class="avatar rounded hover:opacity-50">
-      <input type="radio" name="avatar" value="donkey kong" class="absolute opacity-0 w-0 h-0">
+      <input type="radio" name="avatar" value="dk" class="absolute opacity-0 w-0 h-0">
         <img src="/imgs/dk.png" alt="donkey kong">
     </label>
     <label class="avatar rounded hover:opacity-50">
@@ -151,21 +151,36 @@
       <img src="/imgs/bowser.png" alt="bowser">
     </label>
     <label class="avatar rounded hover:opacity-50">
-      <input type="radio" name="avatar" value="Fox McCloud" class="absolute opacity-0 w-0 h-0">
+      <input type="radio" name="avatar" value="fox" class="absolute opacity-0 w-0 h-0">
       <img src="/imgs/fox.png" alt="Fox McCloud">
     </label>
     <label class="avatar rounded hover:opacity-50">
-      <input type="radio" name="avatar" value="Link from Zelda" class="absolute opacity-0 w-0 h-0">
+      <input type="radio" name="avatar" value="link" class="absolute opacity-0 w-0 h-0">
       <img src="/imgs/link.png" alt="Link from Zelda">
     </label>
     <label class="avatar rounded hover:opacity-50">
-      <input type="radio" name="avatar" value="Samus" class="absolute opacity-0 w-0 h-0">
+      <input type="radio" name="avatar" value="samus" class="absolute opacity-0 w-0 h-0">
       <img src="/imgs/samus.png" alt="Samus">
     </label>
   </fieldset>
 
+  <fieldset>
+    <legend class="mb-2">Invited to be an admin?</legend>
+    <div>
+      <label class="cursor-pointer flex items-center gap-10 mb-2">
+        <span class="label-text">Yes</span>
+        <input type="radio" class="radio" name="admin" value="true">
+      </label>
+  
+      <label class="cursor-pointer flex items-center gap-10">
+        <span class="label-text">No&nbsp;</span>
+        <input type="radio" class="radio" name="admin" value="false" checked>
+      </label>
+    </div>
+  </fieldset>
+
   <div class="modal-action">
-    <button type="submit" class="btn btn-secondary">Sign Up</button>
+    <button type="submit" class="btn btn-secondary">Register for Basic Access</button>
   </div>
 </form>
 

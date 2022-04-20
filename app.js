@@ -14,7 +14,7 @@ const flash = require('connect-flash');
 const indexRouter = require('./routes/index');
 const postsRouter = require('./routes/posts');
 const { loginPost, signupPost, clearMessagesPost, clearErrorsPost, logoutGet, joinSuperPowerClubGet, 
-  joinSuperPowerClubPost } = require('./controllers/usersController');
+  joinSuperPowerClubPost } = require('./controllers/otherController');
 const db = require('./config/database');
 const { onError, onListening, normalizePort } = require('./lib/serverUtils');
 
@@ -58,7 +58,8 @@ app.use((req, res, next) => {
 app.use(
   helmet.contentSecurityPolicy({
     directives: {
-      "script-src": ["'self'", "'nonce-8888078926mrd'", "'nonce-pikachuchuchu12345'"],
+      "script-src": ["'self'", "'nonce-8888078926mrd'", "'nonce-pikachuchuchu12345'",
+      "'nonce-famicon8888super'"],
     },
   })
 ); /* a wrapper around 15 smaller middlewares which secure the app by setting 

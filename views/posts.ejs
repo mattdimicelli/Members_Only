@@ -1,7 +1,66 @@
 <%- include('partials/_top') %>
+<script type="module" nonce="famicon8888super">
+    document.querySelector('form#signup_form').addEventListener('submit', (e) => {
+        alert('Remember to also join the Super Power Club for additional and exclusive features!');
+    });
+</script>
+
 <%- include('partials/_second_top') %>
 
 <%- include('partials/_login_modal') %>
 <%- include('partials/_signup_modal') %>
+
+<% posts.map(post => { 
+    let avatarImgUrl;
+    if (post.author.avatar === 'kirby') {
+        avatarImgUrl = `/imgs/${post.author.avatar}.jpg`;
+    }
+    else {
+        avatarImgUrl = `/imgs/${post.author.avatar}.png`;
+    }
+                                                            %>
+
+    <div class="flex justify-center p-4">
+        <article class="text-center bg-base-100 border-secondary-content max-w-2xl flex-1 flex 
+            flex-col-reverse items-center sm:flex-row sm:justify-between px-4 py-4 rounded-2xl 
+            border border-solid">
+
+                <% if (user?.admin) { %>
+                
+                <form action="/posts/delete/<%- post.id %>" method="post">
+                    <button type="submit" class="btn btn-accent self-end">Delete</button>
+                </form>
+                
+
+                <% } %>
+
+                <div class="avatar justify-center self-center w-40 mb-2">
+                    <div class="rounded">
+                        <img class="" src="<%- avatarImgUrl %>" alt="<%= post.author.avatar %>">
+                    </div>
+                </div>
+                <section>
+                    <h2 class="font-bold"><%= post.title %></h2>
+                    <p><%= post.body %></p>
+                    <div class="divider"></div>
+
+                    <% if (user) { %>
+
+                    <div class="text-sm sm:text-base">Posted by <%= user.fullName %></div>
+                    <div class="mb-2 text-sm sm:text-base"><%= post.timestamp.toLocaleString() %></div>
+
+                    <% } else { %>
+                        
+                    <div class="text-sm sm:text-base mb-2">Join the <span class="uppercase text-primary 
+                        italic font-bold [text-shadow:-1px_0.5px_#f4290f]">Super Power Club</span>
+                        <span> to see who posted and when!</span>
+                    </div>
+
+                    <% } %>
+                        
+                </section>
+        </article>
+    </div>
+<% }); %>
 
 <%- include('partials/_bottom') %>

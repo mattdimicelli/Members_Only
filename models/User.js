@@ -37,10 +37,11 @@ const userSchema = new Schema({
         required: [true, 'An avatar is required'],
         enum: {
             values: ['mario', 'luigi', 'peach', 'donkey kong', 'yoshi', 'kirby', 'bowser', 
-                    'Fox McCloud', 'Link from Zelda', 'Samus'],
+                    'fox', 'link', 'samus'],
             message: '{VALUE} is not a valid avatar',
         } 
     },
+    admin: { type: Boolean, default: false },
 });
 
 userSchema.virtual('fullName').get(function() {

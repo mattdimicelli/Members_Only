@@ -1,7 +1,7 @@
 const User = require('../models/User');
 const { isStrongPassword } = require('validator');
 const passport = require('passport');
-const debug = require('debug')('app:usersController');
+const debug = require('debug')('app:otherController');
 const bcrypt = require('bcryptjs');
 
 exports.clearErrorsPost = (req, res, next) => {
@@ -57,6 +57,7 @@ exports.signupPost = async (req, res, next) => {
         signup_first_name: firstName,
         signup_last_name: lastName,
         avatar,
+        admin,
     } = req.body;
 
     try {
@@ -68,7 +69,7 @@ exports.signupPost = async (req, res, next) => {
             throw new Error('Passwords must match');
         }
         const hashedPassword = await bcrypt.hash(signup_password, 10);
-        const user = new User({ email, firstName, lastName, hashedPassword, avatar });
+        const user = new User({ email, firstName, lastName, hashedPassword, avatar, admin });
         await user.save();
         debug('Mongoose user object: ', user);
         req.session.errorsObj = undefined;  /* there's no ValidationError from the schema validation
