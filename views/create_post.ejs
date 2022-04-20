@@ -27,12 +27,55 @@ document.querySelector('form#create_post').addEventListener('submit', (e) => {
   <form class="form-control max-w-md flex-1" method="post" action="/posts/create-post" 
     id="create_post">
     <h1 class="mb-2 bg-primary text-primary-content text-center">Post a Message</h1>
+
+    <% if (typeof(errors) !== 'undefined' && errors?.title) { %>
+
+    <label class="label text-sm md:text-base text-error-content bg-error" for="title">
+      Title required:
+    </label>
+
+    <% } else { %>
+
     <label class="label text-sm md:text-base" for="title">Title:</label>
+  
+    <% } %>
+
+    <% if (typeof(errors) !== 'undefined' && errors) { %>
+
+    <input id="title" name="title" type="text" required maxlength="80" pattern=".*\S+.*" 
+    title="This field is required" class="input input-bordered input-xs mb-2" value="<%= title %>">
+
+    <% } else { %>
+    
     <input id="title" name="title" type="text" required maxlength="80" pattern=".*\S+.*" 
       title="This field is required" class="input input-bordered input-xs mb-2">
+
+    <% } %>
+
+    <% if (typeof(errors) !== 'undefined' && errors?.body) { %>
+
+    <label class="label text-sm md:text-base text-error-content bg-error" for="message">
+      Message required:
+    </label>
+
+    <% } else { %>
+    
     <label class="label text-sm md:text-base" for="message">Message:</label>
+
+    <% } %>
+    
+    <% if (typeof(errors) !== 'undefined' && errors) { %>
+
+    <textarea id="message" name="message" class="textarea textarea-bordered mb-2" rows="8" 
+      maxlength="10000" required><%= body %></textarea>
+
+    <% } else { %>
+
     <textarea id="message" name="message" class="textarea textarea-bordered mb-2" rows="8" 
       maxlength="10000" required></textarea>
+
+    <% } %>
+
     <button class="btn btn-secondary btn-sm" type="submit">Submit Post</button>
   </form>
 <div>

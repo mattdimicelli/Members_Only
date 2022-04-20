@@ -11,15 +11,21 @@ exports.createPostGet = (req, res, next) => {
 }
 
 exports.createPostPost = async (req, res, next) => {
+    const { message: body, title } = req.body;
     try {
-        const { message: body, title } = req.body;
         const author = req.user;
         const post = new Post({title, body, author});
         await post.save();
         res.redirect('/');
     }
     catch(err) {
-        next(err);
+        if (err.constructor.name === 'ValidationError') {
+            res.render('create_post', 
+                {title: 'Post a Message', errors: err.errors, title, body});
+        }
+        else {
+            next(err);
+        }
     }
     
 }
