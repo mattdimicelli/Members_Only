@@ -203,5 +203,88 @@
   </div>
 </form>
 
+<script src="https://unpkg.com/validator@latest/validator.min.js" nonce="rabbledabbledoodoo22"></script>
+<script nonce="woogyboogydoogy55">
+  const validate = new window.JustValidate('#signup_form');
+
+  validate
+    .addField('#signup-first-name', [
+      {
+        rule: 'required',
+        errorMessage: 'First name is required',
+      },
+      {
+        validator: (value) => validator.isAlpha(value, 'en-US', {ignore: ' '}),
+        errorMessage: 'Names must be letters and spaces only',
+      },
+      {
+        validator: (value) => value.trim().length >= 1,
+        errorMessage: 'Must be at least one char',
+      },
+    ])
+    .addField('#signup-last-name', [
+      {
+        rule: 'required',
+        errorMessage: 'Last name is required',
+      },
+      {
+        validator: (value) => validator.isAlpha(value, 'en-US', {ignore: ' '}),
+        errorMessage: 'Names must be letters and spaces only',
+      },
+      {
+        validator: (value) => value.trim().length >= 1,
+        errorMessage: 'Must be at least one char',
+      },
+    ])
+    .addField('#signup-email', [
+      {
+        rule: 'required',
+        errorMessage: 'Email address is required',
+      },
+      {
+        rule: 'email',
+        errorMessage: 'Must be a valid email address',
+      },
+    ])
+    .addField('#signup-password', [
+      {
+        rule: 'strongPassword',
+      },
+      {
+        rule: 'required',
+        errorMessage: 'Password is required',
+      },
+    ])
+    .addField('#signup-password-confirm', [
+      {
+        validator: (value, fields) => {
+          if (fields['#signup-password'] && fields['#signup-password-confirm'].elem) {
+            const repeatPasswordValue = fields['#signup-password'].elem.value;
+
+            return value === repeatPasswordValue;
+          }
+
+          return true;
+        },
+        errorMessage: 'Passwords must match',
+      },
+      {
+        rule: 'required',
+        errorMessage: 'Password confirmation is required'
+      },
+    ])
+    .addField('#code', [
+      {
+        validator: (value, fields) => {
+          if (fields['#code'].elem.parentElement.hidden === false) {
+            return value === 'NTDOY';
+          }
+          return true;
+        },
+        errorMessage: 'Incorrect admin privilege code',
+      },
+    ]);
+</script>
+
 </div>
 </div>

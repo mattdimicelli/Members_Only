@@ -59,7 +59,8 @@ app.use(
   helmet.contentSecurityPolicy({
     directives: {
       "script-src": ["'self'", "'nonce-8888078926mrd'", "'nonce-pikachuchuchu12345'",
-      "'nonce-famicon8888super'"],
+      "'nonce-famicon8888super'", "'nonce-987654321external'", "'nonce-rabbledabbledoodoo22'",
+    "'nonce-woogyboogydoogy55'"],
     },
   })
 ); /* a wrapper around 15 smaller middlewares which secure the app by setting 
