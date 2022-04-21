@@ -44,8 +44,6 @@ require('./config/passport');
 app.use(passport.initialize());
 app.use(passport.session());
 app.use((req, res, next) => {
-  debug('Session obj: ', req.session);
-  debug('User obj: ', req.user);
   next();
 });
 

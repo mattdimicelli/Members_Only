@@ -203,8 +203,8 @@
   </div>
 </form>
 
-<script src="https://unpkg.com/validator@latest/validator.min.js" nonce="rabbledabbledoodoo22"></script>
-<script nonce="woogyboogydoogy55">
+<script src="https://unpkg.com/validator@latest/validator.min.js" nonce="rabbledabbledoodoo22" defer></script>
+<script nonce="woogyboogydoogy55" type="module">
   const validate = new window.JustValidate('#signup_form');
 
   validate
@@ -283,8 +283,11 @@
         },
         errorMessage: 'Incorrect admin privilege code',
       },
-    ]);
+    ])
+    .onSuccess((e) =>   e.target.submit());
 </script>
+
+
 
 </div>
 </div>
