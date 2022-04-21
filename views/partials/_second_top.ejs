@@ -25,11 +25,11 @@
 
         <li><a href="/posts/create-post">Create a New Post</a></li>
 
-        <% if (!locals.user.member) { %>
+          <% if (!locals.user.member) { %>
 
-        <li><a href='/join-super-power-club'>Join the Super Power Club!</a></li>
+          <li><a href='/join-super-power-club'>Join the Super Power Club!</a></li>
 
-        <% } %>
+          <% } %>
 
         <li><a href='/logout'>Log Out</a></li>
 
@@ -43,9 +43,28 @@
         </ul>
       </nav>
 
-    <nav class="hidden md:gap-x-4 md:flex" >
+    <nav class="hidden md:navbar-end md:flex md:gap-x-2">
     <!-- navbar buttons for medium-sized screens and up -->
 
+  
+      <% if (locals.user) { %>
+
+      <button class="md:btn md:btn-secondary">
+        <a href="/posts/create-post">Create a New Post</a>
+      </button>
+
+        <% if (!locals.user.member) { %>
+
+        <button class="md:btn md:btn-secondary">
+          <a href='/join-super-power-club'>Join the Super Power Club!</a>
+        </button>
+
+        <% } %>
+
+      <button class="md:btn md:btn-secondary"><a href='/logout'>Log Out</a></button>
+
+      <% } else { %>
+      
       <!-- since this labels a checkbox, a click on the label checks it & opens the 
         Log In modal -->
       <label for="log-in-modal" class="btn btn-secondary btn-sm modal-button md:btn-lg">
@@ -57,6 +76,9 @@
       <label for="sign-up-modal" class="btn btn-secondary btn-sm modal-button md:btn-lg">
         Register for Basic Access
       </label>
+
+      <% } %>
+
     </nav>
 
     

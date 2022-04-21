@@ -36,7 +36,7 @@ const userSchema = new Schema({
         type: String,
         required: [true, 'An avatar is required'],
         enum: {
-            values: ['mario', 'luigi', 'peach', 'donkey kong', 'yoshi', 'kirby', 'bowser', 
+            values: ['mario', 'luigi', 'peach', 'dk', 'yoshi', 'kirby', 'bowser', 
                     'fox', 'link', 'samus'],
             message: '{VALUE} is not a valid avatar',
         } 
