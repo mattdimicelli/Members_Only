@@ -3,6 +3,19 @@
     document.querySelector('form#signup_form').addEventListener('submit', (e) => {
         alert('Remember to also join the Super Power Club for additional and exclusive features!');
     });
+    const codeLabel = document.querySelector('label.code-label');
+    const yesInput = document.querySelector('input#yes_input');
+    const noInput = document.querySelector('input#no_input');
+    yesInput.addEventListener('input', (e) => {
+        if (yesInput.checked) {
+        codeLabel.hidden = false;
+        } 
+    }); 
+    noInput.addEventListener('input', (e) => {
+        if (noInput.checked) {
+        codeLabel.hidden = true;
+        } 
+    }); 
 </script>
 
 <%- include('partials/_second_top') %>
@@ -44,9 +57,9 @@
                     <p><%= post.body %></p>
                     <div class="divider"></div>
 
-                    <% if (user) { %>
+                    <% if (user?.member) { %>
 
-                    <div class="text-sm sm:text-base">Posted by <%= user.fullName %></div>
+                    <div class="text-sm sm:text-base">Posted by <%= post.author.fullName %></div>
                     <div class="mb-2 text-sm sm:text-base"><%= post.timestamp.toLocaleString() %></div>
 
                     <% } else { %>

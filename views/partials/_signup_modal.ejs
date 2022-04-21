@@ -164,17 +164,36 @@
     </label>
   </fieldset>
 
-  <fieldset>
+  <fieldset class="form-control">
     <legend class="mb-2">Invited to be an admin?</legend>
     <div>
-      <label class="cursor-pointer flex items-center gap-10 mb-2">
+      <label class="cursor-pointer label w-20">
         <span class="label-text">Yes</span>
-        <input type="radio" class="radio" name="admin" value="true">
+        <input type="radio" class="radio" name="admin" value="true" id="yes_input">
       </label>
   
-      <label class="cursor-pointer flex items-center gap-10">
-        <span class="label-text">No&nbsp;</span>
-        <input type="radio" class="radio" name="admin" value="false" checked>
+      <label class="cursor-pointer label w-20 mb-2">
+        <span class="label-text">No</span>
+        <input type="radio" class="radio" name="admin" value="false" id="no_input" checked>
+      </label>
+
+      
+
+      <% if (errors?.code) { %>
+        
+      <label class="code-label">
+        <div class="label-text mb-2 text-error-content bg-error">
+          Incorrect admin privilege code:
+        </div>
+
+      <% } else { %>
+
+      <label class="code-label" hidden>
+        <div class="label-text mb-2">Enter the admin privilege code:</div>
+
+      <% } %>
+        
+        <input type="text" name="code" id="code" class="input input-bordered">
       </label>
     </div>
   </fieldset>
