@@ -2606,6 +2606,14 @@ input[type="radio"]:checked + img {
     margin-bottom: 6rem;
   }
 
+  .md\:mb-2 {
+    margin-bottom: 0.5rem;
+  }
+
+  .md\:block {
+    display: block;
+  }
+
   .md\:flex {
     display: flex;
   }
