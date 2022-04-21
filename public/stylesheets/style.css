@@ -1389,12 +1389,6 @@ html {
   }
 }
 
-.card-bordered {
-  border-width: 1px;
-  --tw-border-opacity: 1;
-  border-color: hsl(var(--b2, var(--b1)) / var(--tw-border-opacity));
-}
-
 .checkbox:focus-visible {
   outline: 2px solid hsl(var(--bc));
   outline-offset: 2px;
@@ -2104,16 +2098,6 @@ body[dir="rtl"] .checkbox:checked,
 
 .border-solid {
   border-style: solid;
-}
-
-.border-secondary-content {
-  --tw-border-opacity: 1;
-  border-color: hsl(var(--sc) / var(--tw-border-opacity));
-}
-
-.border-secondary {
-  --tw-border-opacity: 1;
-  border-color: hsl(var(--s) / var(--tw-border-opacity));
 }
 
 .border-accent {
