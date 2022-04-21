@@ -12,7 +12,7 @@ features to them respectively.  Like always, this app was built mobile-first wit
 ### Screenshot
 
 <p align="center">
-  <img src="./screenshot_for_readme.png" alt="super power club app" width="75%" height="75%">
+  <img src="./screenshot_for_readme2.png" alt="super power club app" width="75%" height="75%">
 </p>
 
 ### Links
