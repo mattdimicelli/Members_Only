@@ -101,7 +101,7 @@ app.set('port', port);
 
 const server = http.createServer(app);
 server.listen(port);
-server.on('error', onError);
+server.on('error', (err) => onError(err, port));
 server.on('listening', () => onListening(server));
 
 
