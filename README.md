@@ -17,7 +17,7 @@ features to them respectively.  Like always, this app was built mobile-first wit
 
 ### Links
 
-- [Live site](#)
+- [Live site](https://super-power-club.glitch.me)
 - [Repo](https://github.com/mattdimicelli/Members_Only)
 
 ## My process
@@ -62,6 +62,6 @@ Note for improvement: in future projects I would look further into a AJV, which 
 schema-based validation library which might allow for using the same schema on both the front end 
 and the back end.
 
-Also, Heroku's free tier does not provide a static IP address.  This is problematic in regards to MongoDB since MongoDB requires that any client
-that accesses the database has it's IP address in a whitelist.  Despite trying several programs/services such as Fixie, which provide you with a static IP address to use for this purpose, I was unable to find a work-around actually functioned.  My imperfect solution was to allow connections to MongoDB from all IP addresses.  For a commercial project or a project that requires mores security, 
+Also, Glitch does not provide a static IP address.  This is problematic in regards to MongoDB since MongoDB requires that any client
+that accesses the database has it's IP address in a whitelist. My imperfect solution was to allow connections to MongoDB from all IP addresses.  For a commercial project or a project that requires mores security, 
 this would obviously not be sufficient and another solution would be needed.
