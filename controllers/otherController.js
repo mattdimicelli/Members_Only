@@ -61,23 +61,27 @@ exports.signupPost = async (req, res, next) => {
     } = req.body;
 
     let isStrongPasswordError;
-    let passwordConfirmationError;
+    let pwConfirmErr;
     let adminCodeError;
+
+    const mustMatch = 'Passwords must match';
+    const mustBeStrong = 'Must be min 8 chars & contain uppercase & lowercase chars, numbers '
+                        + '& symbols';
+    const wrongCode = 'Incorrect admin privilege code';
 
     try {
         if (!isStrongPassword(signup_password)) {
-            isStrongPasswordError = new Error('Must be min 8 chars & contain uppercase & lowercase chars, numbers & ' 
-                            + 'symbols');
+            isStrongPasswordError = new Error(mustBeStrong);
         }
         if (signup_password !== signup_password_confirm) {
-            passwordConfirmationError = new Error('Passwords must match');
+            pwConfirmErr = new Error(mustMatch);
         }
         if (code && code !== 'NTDOY') {
             // this validation only executed if the user attempted to gain admin privileges
-            adminCodeError = new Error('Incorrect admin privilege code');
+            adminCodeError = new Error(wrongCode);
         }
         if (isStrongPasswordError) throw isStrongPasswordError;
-        if (passwordConfirmationError) throw passwordConfirmationError;
+        if (pwConfirmErr) throw pwConfirmErr;
         if (adminCodeError) throw adminCodeError;
 
         const hashedPassword = await bcrypt.hash(signup_password, 10);
@@ -91,12 +95,8 @@ exports.signupPost = async (req, res, next) => {
     }
 
     catch(err) {
-        if (err.message === 'Passwords must match' 
-            || err.message === 'Must be min 8 chars & contain uppercase & lowercase chars, numbers '
-                               + '& symbols'
-            || err.message === 'Incorrect admin privilege code'
-        ) 
-        {
+        if (err.message === mustMatch || err.message === mustBeStrong || err.message === wrongCode){
+
             /* these errors did not originate from the Mongoose schema validation, so can safely
             execute the schema validation to see if there are any additional invalid fields.
             Plug in a fake password hash so the validation doesn't fail due to a lack of a
@@ -104,16 +104,15 @@ exports.signupPost = async (req, res, next) => {
             const hashedPassword = 'fake password hash';
             const user = new User({ email, firstName, lastName, hashedPassword, avatar });
             const schemaValidationErrors = user.validateSync();
+
             if (schemaValidationErrors) {
                 // there were schema validation errors in addition to password validation
                 // or admin privilege code validation errors
                 let totalValidationErrors = {...schemaValidationErrors.errors};
-                if (err.message === 'Must be min 8 chars & contain uppercase & lowercase chars,' 
-                    + ' numbers & symbols') {
+                if (err.message === mustBeStrong) {
                     totalValidationErrors.password = err.message;
-                    if (passwordConfirmationError) {
-                        totalValidationErrors.passwordConfirmation 
-                            = passwordConfirmationError.message;
+                    if (pwConfirmErr) {
+                        totalValidationErrors.passwordConfirmation = pwConfirmErr.message;
                     }
                     if (adminCodeError) {
                         totalValidationErrors.code = adminCodeError.message;
@@ -132,37 +131,39 @@ exports.signupPost = async (req, res, next) => {
             on the req obj via the session middleware in order to report to the user */
             res.redirect('/');
             }
+
             else {
                 /* there were only password validation or admin privilege code validation errors
                 . Build an errorsObj that has the same signature as the errors object created by
                     Mongoose. pass password errors on the req obj via the session middleware in 
                     order to report to the user */
                 let errorsObj = {};
-                if (err.message === 'Must be min 8 chars & contain uppercase & lowercase chars,' 
-                    + ' numbers & symbols') {
+                if (err.message === mustBeStrong) {
                     errorsObj.password = err.message;
-                    if (passwordConfirmationError) {
-                        errorsObj.passwordConfirmation = passwordConfirmationError.message;
+                    if (pwConfirmErr) {
+                        errorsObj.passwordConfirmation = pwConfirmErr.message;
                     }
                     if (adminCodeError) {
                         errorsObj.code = adminCodeError.message;
                     }
                     req.session.errorsObj = errorsObj;
                 } 
-                if (err.message === 'Passwords must match') {
+                if (err.message === mustMatch) {
                     errorsObj.passwordConfirmation = err.message;
                     if (adminCodeError) {
                         errorsObj.code = adminCodeError.message;
                     }
                     req.session.errorsObj = errorsObj;
                 }
-                if (err.message === 'Incorrect admin privilege code') {
+                if (err.message === wrongCode) {
                     errorsObj.code = err.message;
                     req.session.errorsObj = errorsObj;
                 }
                 res.redirect('/');
             }
+
         }
+        
         else if (err.constructor.name === 'ValidationError') {
             // there were no password validation errors, only Mongoose schema validation errors
             req.session.errorsObj = err.errors;  /* passes any ValidationError (from the schema 
