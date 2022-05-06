@@ -24,18 +24,23 @@ exports.joinSuperPowerClubGet = async (req, res, next) => {
 }
 
 exports.joinSuperPowerClubPost = async (req, res, next) => {
-    const {year} = req.body;
-    if (year === '2012') {
-        try {
-            await User.findByIdAndUpdate(req.user.id, {member: true});
-            res.redirect('/');
+    if (req.isAuthenticated()) {
+        const {year} = req.body;
+        if (year === '2012') {
+            try {
+                await User.findByIdAndUpdate(req.user.id, {member: true});
+                res.redirect('/');
+            }
+            catch(err) {
+                next(err);
+            }
         }
-        catch(err) {
-            next(err);
+        else {
+            res.redirect('/join-super-power-club');
         }
-    }
-    else {
-        res.redirect('/join-super-power-club');
+    } else {
+        req.flash('login_status', 'Not logged in');
+        res.redirect('/');
     }
 }
 

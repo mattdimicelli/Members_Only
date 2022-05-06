@@ -11,38 +11,48 @@ exports.createPostGet = (req, res, next) => {
 }
 
 exports.createPostPost = async (req, res, next) => {
-    const { message: body, title } = req.body;
-    try {
-        const author = req.user;
-        const post = new Post({title, body, author});
-        await post.save();
+    if (req.isAuthenticated()) {
+        const { message: body, title } = req.body;
+        try {
+            const author = req.user;
+            const post = new Post({title, body, author});
+            await post.save();
+            res.redirect('/');
+        }
+        catch(err) {
+            if (err.constructor.name === 'ValidationError') {
+                res.render('create_post', 
+                    {title: 'Post a Message', errors: err.errors, title, body});
+            }
+            else {
+                next(err);
+            }
+        }
+    } else {
+        req.flash('login_status', 'Not logged in');
         res.redirect('/');
-    }
-    catch(err) {
-        if (err.constructor.name === 'ValidationError') {
-            res.render('create_post', 
-                {title: 'Post a Message', errors: err.errors, title, body});
-        }
-        else {
-            next(err);
-        }
     }
 }
 
 exports.deletePostPost = async (req, res, next) => {
-    try {
-        const postId = req.params.id;
-        if (req.user && req.user.admin) {
-            await Post.findByIdAndDelete(postId);
+    if (req.isAuthenticated()) {
+        try {
+            const postId = req.params.id;
+            if (req.user && req.user.admin) {
+                await Post.findByIdAndDelete(postId);
+                res.redirect('/');
+            }
+            else {
+                res.redirect('/');
+            }
+        }
+        catch (err) {
+            next(err);
+        }
+    } else {
+            req.flash('login_status', 'Not logged in');
             res.redirect('/');
         }
-        else {
-            res.redirect('/');
-        }
-    }
-    catch (err) {
-        next(err);
-    }
 }
 
 // Display home page (posts)
