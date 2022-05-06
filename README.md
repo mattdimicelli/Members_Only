@@ -17,7 +17,7 @@ features to them respectively.  Like always, this app was built mobile-first wit
 
 ### Links
 
-- [Live site](https://super-power-club.glitch.me)
+- [Live site](https://members-only-fullstack.herokuapp.com)
 - [Repo](https://github.com/mattdimicelli/Members_Only)
 
 ## My process
