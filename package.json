@@ -4,9 +4,9 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "DEBUG=app,app:* nodemon app.js",
+    "start": "DEBUG=app,app:* node app.js",
     "buildcss": "npx tailwindcss -i ./tailwind.css -o ./public/stylesheets/style.css --watch",
-    "debug": "DEBUG=*, nodemon app.js"
+    "debug": "DEBUG=*, node app.js"
   },
   "keywords": [],
   "author": "",
