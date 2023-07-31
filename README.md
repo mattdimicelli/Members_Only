@@ -17,7 +17,7 @@ features to them respectively.  Like always, this app was built mobile-first wit
 
 ### Links
 
-- [Live site](https://members-only-fullstack.herokuapp.com)
+- [Live site](https://members-only-backend.onrender.com/)
 - [Repo](https://github.com/mattdimicelli/Members_Only)
 
 ## My process
@@ -40,7 +40,7 @@ the encryption work together to accomplish a common goal.
 Since I had employed Helmet for added security but also utilized inline scripts, I had to learn 
 about Content Security Policy in order to configure Helmet to allow the scripts.
 
-I started off implementing the backend valdidation (of user inputted data from forms) in the 
+I started off implementing the backend validation (of user inputted data from forms) in the 
 Mongoose schema.  However, I learned that this strategy would only work for data that corresponded
 to the schema/model.  Any form data that wasn't being passed into the schema as arguments would not
 be validated.  For example, I had to validate the strings from the password and password 
@@ -62,6 +62,4 @@ Note for improvement: in future projects I would look further into a AJV, which 
 schema-based validation library which might allow for using the same schema on both the front end 
 and the back end.
 
-Also, Glitch does not provide a static IP address.  This is problematic in regards to MongoDB since MongoDB requires that any client
-that accesses the database has it's IP address in a whitelist. My imperfect solution was to allow connections to MongoDB from all IP addresses.  For a commercial project or a project that requires mores security, 
-this would obviously not be sufficient and another solution would be needed.
+
